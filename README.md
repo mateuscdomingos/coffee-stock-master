@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Coffee Stock Master
 
-## Getting Started
+A robust, enterprise-grade supply chain and inventory management system designed for coffee shop chains. This project serves as a showcase of high-level Frontend Engineering, applying **Clean Architecture**, **Domain-Driven Design (DDD)**, and **SOLID** principles.
 
-First, run the development server:
+## The Problem
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Coffee shop owners often struggle with manual inventory tracking, leading to waste or stockouts. Managers need a fail-safe way to request supplies while respecting monthly budgets and stock levels. This application provides a controlled environment for supply orchestration.
+
+## Architecture & Patterns
+
+This project is built to be independent of external frameworks or UI libraries. The core business logic is encapsulated in a pure domain layer, ensuring the system is easy to test and maintain.
+
+- **Clean Architecture:** Strict separation of concerns between Domain, Application, Infra, and UI layers.
+- **Domain-Driven Design (DDD):** Modeling business rules through Entities, Value Objects, and Domain Services.
+- **Immutability:** State management focused on predictable data flow, avoiding side effects in business rules.
+- **State Machine:** Order lifecycle managed through explicit status transitions.
+
+## 🛠️ Tech Stack
+
+- **Framework:** [Next.js](https://nextjs.org/) 15+ (App Router)
+- **Language:** [TypeScript](https://www.typescriptlang.org/) (Strict Mode)
+- **Package Manager:** [pnpm](https://pnpm.io/)
+- **Styling:** [Material UI (MUI)](https://mui.com/) & [Tailwind CSS](https://tailwindcss.com/)
+- **Testing:** [Vitest](https://vitest.dev/) & [React Testing Library](https://testing-library.com/)
+- **CI/CD:** GitHub Actions (Validating Lint, Build, and Unit Tests on every PR)
+
+## 📂 Project Structure
+
+```text
+src/
+  ├── core/                # Pure business logic (Framework agnostic)
+  │   ├── domain/          # Entities, Value Objects, and Domain Rules
+  │   ├── application/     # Use Cases (Orchestration & Business flows)
+  │   └── interfaces/      # Repository and Gateway contracts (Abstractions)
+  ├── infra/               # Implementations of external concerns
+  │   ├── repositories/    # Database/API implementations (e.g., Vercel Postgres)
+  │   └── adapters/        # Data mappers and formatters
+  └── ui/                  # Framework-specific layer (Next.js/MUI)
+      ├── components/      # React components (Atomic Design or Feature-based)
+      ├── hooks/           # UI-related custom hooks
+      └── app/             # Routing, Page layouts, and Server Components
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ⚙️ Development
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Prerequisites
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Node.js (v20 or higher)
+- pnpm (`npm install -g pnpm`)
 
-## Learn More
+### Getting Started
 
-To learn more about Next.js, take a look at the following resources:
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/YOUR_USERNAME/coffee-stock-master.git](https://github.com/YOUR_USERNAME/coffee-stock-master.git)
+   ```
+2. **Install dependencies:**
+   ```bash
+   pnpm install
+   ```
+3. **Run unit tests:**
+   ```bash
+   pnpm test
+   ```
+4. **Start the development server:**
+   ```bash
+   pnpm dev
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Conventional Commits
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This project follows the Conventional Commits specification for a clear and organized commit history. Examples:
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `feat: add budget validation logic to Order entity`
+- `fix: correct stock deduction calculation`
+- `test: add unit tests for order approval use case`
+- `docs: update readme with architectural patterns`
+- `chore: configure github actions pipeline`
