@@ -1,11 +1,11 @@
-import { render, screen } from "@testing-library/react";
-import Home from "./page";
+import { render, screen } from '@testing-library/react';
+import Home from './page';
 
-describe("Home Page", () => {
-  it("should render correctly", () => {
+describe('Home Page', () => {
+  it('should render correctly', () => {
     render(<Home />);
 
-    const element = screen.getByText("To get started, edit the page.tsx file.");
+    const element = screen.getByText('To get started, edit the page.tsx file.');
 
     expect(element).toBeInTheDocument();
   });
