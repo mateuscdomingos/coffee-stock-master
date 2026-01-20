@@ -11,8 +11,8 @@ interface ProductProps {
 
 export class Product {
   constructor(public readonly props: ProductProps) {
-    this.validateQuantity(props.stockQuantity, "stockQuantity");
-    this.validateQuantity(props.minimumStockQuantity, "minimumStockQuantity");
+    this.validateQuantity(props.stockQuantity, 'stockQuantity');
+    this.validateQuantity(props.minimumStockQuantity, 'minimumStockQuantity');
   }
 
   private validateQuantity(quantity: number, fieldName: string): void {
@@ -22,12 +22,12 @@ export class Product {
   }
 
   updateStockQuantity(quantity: number) {
-    this.validateQuantity(quantity, "stockQuantity");
+    this.validateQuantity(quantity, 'stockQuantity');
     return new Product({ ...this.props, stockQuantity: quantity });
   }
 
   updateMinimumStockQuantity(quantity: number) {
-    this.validateQuantity(quantity, "minimumStockQuantity");
+    this.validateQuantity(quantity, 'minimumStockQuantity');
     return new Product({ ...this.props, minimumStockQuantity: quantity });
   }
 }

@@ -1,4 +1,4 @@
-export type OrderStatus = "PENDING" | "APPROVED" | "REJECTED" | "DELIVERED";
+export type OrderStatus = 'PENDING' | 'APPROVED' | 'REJECTED' | 'DELIVERED';
 
 interface OrderItem {
   readonly productId: string;
@@ -46,7 +46,7 @@ export class Order {
       currentMonthSpendingInCents + this.totalAmountInCents >
       storeMonthlyBudgetInCents
     ) {
-      throw new Error("Monthly budget exceeded");
+      throw new Error('Monthly budget exceeded');
     }
   }
 
