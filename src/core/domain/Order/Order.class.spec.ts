@@ -1,4 +1,4 @@
-import { Order } from './Order';
+import { Order } from './Order.class';
 
 describe('Order', () => {
   describe('when creating a order', () => {

@@ -9,7 +9,7 @@ export class Store {
     this.validateMonthlyBudget(props.monthlyBudgetInCents);
   }
 
-  validateMonthlyBudget(monthlyBudgetInCents: number): void {
+  private validateMonthlyBudget(monthlyBudgetInCents: number): void {
     if (monthlyBudgetInCents < 0) {
       throw new Error('Monthly budget cannot be negative');
     }
