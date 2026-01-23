@@ -1,8 +1,4 @@
-interface StoreProps {
-  readonly id: string;
-  readonly name: string;
-  readonly monthlyBudgetInCents: number;
-}
+import { StoreProps } from './Store.types';
 
 export class Store {
   constructor(public readonly props: StoreProps) {
