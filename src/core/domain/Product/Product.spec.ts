@@ -1,5 +1,5 @@
 import { Product } from './Product.class';
-import * as productFP from './Product.fn';
+import * as productFP from './product.fn';
 
 describe('Domain: Product', () => {
   describe('Paradigm: Object-Oriented (OOP)', () => {

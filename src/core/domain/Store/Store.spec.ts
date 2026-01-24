@@ -1,5 +1,5 @@
 import { Store } from './Store.class';
-import * as storeFP from './Store.fn';
+import * as storeFP from './store.fn';
 
 describe('Domain: Store', () => {
   describe('Paradigm: Object-Oriented (OOP)', () => {

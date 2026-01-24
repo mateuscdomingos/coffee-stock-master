@@ -1,5 +1,5 @@
 import { Order } from './Order.class';
-import * as orderFP from './Order.fn';
+import * as orderFP from './order.fn';
 
 describe('Domain: Order', () => {
   describe('Paradigm: Object-Oriented (OOP)', () => {
