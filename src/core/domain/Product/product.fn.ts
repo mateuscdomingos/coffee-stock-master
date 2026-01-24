@@ -1,4 +1,4 @@
-import { Product, ProductProps } from './Product.types';
+import { Product, ProductProps } from './product.types';
 
 const validateQuantity = (quantity: number, fieldName: string): void => {
   if (quantity < 0) {

@@ -1,4 +1,4 @@
-import { StoreProps } from './Store.types';
+import { StoreProps } from './store.types';
 
 export class Store {
   constructor(public readonly props: StoreProps) {

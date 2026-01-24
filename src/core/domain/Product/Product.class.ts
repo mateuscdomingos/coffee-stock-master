@@ -1,4 +1,4 @@
-import { ProductProps } from './Product.types';
+import { ProductProps } from './product.types';
 
 export class Product {
   constructor(public readonly props: ProductProps) {

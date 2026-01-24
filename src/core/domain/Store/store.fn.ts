@@ -1,4 +1,4 @@
-import { Store, StoreProps } from './Store.types';
+import { Store, StoreProps } from './store.types';
 
 const validateMonthlyBudget = (monthlyBudgetInCents: number): void => {
   if (monthlyBudgetInCents < 0) {

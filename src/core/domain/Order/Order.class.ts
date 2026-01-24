@@ -1,4 +1,4 @@
-import { OrderItem, OrderProps, OrderStatus } from './Order.types';
+import { OrderItem, OrderProps, OrderStatus } from './order.types';
 
 export class Order {
   constructor(public readonly props: OrderProps) {}

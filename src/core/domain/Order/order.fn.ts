@@ -1,4 +1,4 @@
-import { Order, OrderItem, OrderProps, OrderStatus } from './Order.types';
+import { Order, OrderItem, OrderProps, OrderStatus } from './order.types';
 
 export const createOrder = (props: OrderProps): Order => {
   return Object.freeze({ ...props });
