@@ -9,8 +9,8 @@
     "format:check": "prettier --check \"src/**/*.{ts,tsx,md,json}\"",
     "lint": "eslint",
     "start": "next start",
-    "test": "jest",
-    "test:watch": "jest --watch"
+    "test": "TZ=UTC jest",
+    "test:watch": "pnpm test --watch"
   },
   "dependencies": {
     "date-fns": "^4.1.0",
