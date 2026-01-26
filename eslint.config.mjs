@@ -12,10 +12,8 @@ const eslintConfig = defineConfig([
       prettier: prettierPlugin,
     },
     rules: {
-      // Ativa o Prettier como uma regra do ESLint
       'prettier/prettier': 'error',
 
-      // Desativa as regras de estilo do ESLint que conflitam com o Prettier
       ...prettierConfig.rules,
     },
   },
