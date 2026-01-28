@@ -8,22 +8,24 @@ datasource db {
 }
 
 model Store {
-  id                   String  @id
+  id                   String   @id
   name                 String
   monthlyBudgetInCents Int
   orders               Order[]
+  createdAt            DateTime @default(now())
 }
 
 model Order {
-  id                 String      @id
+  id                 String   @id @default(uuid())
   storeId            String
   employeeId         String
   status             String
   totalAmountInCents Int
-  createdAt          DateTime    @default(now())
+  createdAt          DateTime @default(now())
   
   items              OrderItem[]
   store              Store       @relation(fields: [storeId], references: [id])
+  user               User        @relation(fields: [employeeId], references: [id])
 
   @@index([storeId, createdAt])
 }
@@ -37,4 +39,14 @@ model OrderItem {
   unitPriceInCents Int
   
   order            Order  @relation(fields: [orderId], references: [id])
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+
+  orders Order[]
 }
