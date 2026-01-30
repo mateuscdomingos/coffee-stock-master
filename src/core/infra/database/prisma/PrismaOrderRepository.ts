@@ -1,10 +1,10 @@
-import { PrismaClient } from '@prisma-generated/client';
 import { Order } from '@/core/domain/Order/Order.class';
 import { OrderRepository } from '@/core/domain/Order/OrderRepository';
 import { OrderStatus } from '@/core/domain/Order/order.types';
+import { prisma } from './prisma-client';
 
 export class PrismaOrderRepository implements OrderRepository {
-  constructor(private readonly prisma: PrismaClient) {}
+  private prisma = prisma;
 
   async save(order: Order): Promise<void> {
     const { id, storeId, employeeId, status, createdAt, items } = order.props;
