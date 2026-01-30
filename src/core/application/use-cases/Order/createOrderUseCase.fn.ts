@@ -1,7 +1,7 @@
 import { Order } from '@/core/domain/Order/order.types';
 import { OrderRepositoryFN } from '@/core/domain/Order/OrderRepository';
 import { StoreRepositoryFN } from '@/core/domain/Store/StoreRepository';
-import { DateProvider } from '../providers/DateProvider';
+import { DateProvider } from '../../providers/DateProvider';
 import { validateOrder } from '@/core/domain/Order/order.fn';
 
 export const createOrderUseCase =

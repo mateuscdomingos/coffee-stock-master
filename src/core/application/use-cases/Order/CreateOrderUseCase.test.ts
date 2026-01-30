@@ -7,7 +7,7 @@ import {
   StoreRepository,
   StoreRepositoryFN,
 } from '@/core/domain/Store/StoreRepository';
-import { DateProvider } from '../providers/DateProvider';
+import { DateProvider } from '../../providers/DateProvider';
 import { Order } from '@/core/domain/Order/Order.class';
 import { createOrderUseCase } from './createOrderUseCase.fn';
 import * as orderFP from '@/core/domain/Order/order.fn';
@@ -127,11 +127,7 @@ describe('CreateOrderUseCase', () => {
     });
 
     it('should create an order', async () => {
-      const orderUseCase = createOrderUseCase(
-        orderRepo,
-        storeRepo,
-        dateProvider,
-      );
+      const useCase = createOrderUseCase(orderRepo, storeRepo, dateProvider);
 
       const orderItem = {
         productId: 'prod-1',
@@ -149,7 +145,7 @@ describe('CreateOrderUseCase', () => {
         employeeId: 'emp-456',
       });
 
-      await orderUseCase(order);
+      await useCase(order);
 
       expect(dateProvider.getRangeOfMonth).toHaveBeenCalledWith(
         dateProvider.now(),
@@ -165,11 +161,7 @@ describe('CreateOrderUseCase', () => {
           save: jest.fn(),
         };
 
-        const orderUseCase = createOrderUseCase(
-          orderRepo,
-          storeRepo,
-          dateProvider,
-        );
+        const useCase = createOrderUseCase(orderRepo, storeRepo, dateProvider);
 
         const orderItem = {
           productId: 'prod-1',
@@ -187,7 +179,7 @@ describe('CreateOrderUseCase', () => {
           employeeId: 'emp-456',
         });
 
-        await expect(orderUseCase(order)).rejects.toThrow('Store not found');
+        await expect(useCase(order)).rejects.toThrow('Store not found');
       });
     });
   });

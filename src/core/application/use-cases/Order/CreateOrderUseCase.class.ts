@@ -1,7 +1,7 @@
 import { Order } from '@/core/domain/Order/Order.class';
 import { OrderRepository } from '@/core/domain/Order/OrderRepository';
 import { StoreRepository } from '@/core/domain/Store/StoreRepository';
-import { DateProvider } from '../providers/DateProvider';
+import { DateProvider } from '../../providers/DateProvider';
 
 export class CreateOrderUseCase {
   constructor(
