@@ -24,7 +24,6 @@ describe('RegisterUserUseCase', () => {
         const useCase = new RegisterUserUseCase(userRepository);
 
         await useCase.execute({
-          id: 'user-1',
           name: 'Jane Doe',
           email: 'example@example.com',
           password: 'valid-password',
@@ -49,7 +48,6 @@ describe('RegisterUserUseCase', () => {
 
         await expect(
           useCase.execute({
-            id: 'user-1',
             name: 'Jane Doe',
             email: 'example@example.com',
             password: 'valid-password',
@@ -76,7 +74,6 @@ describe('RegisterUserUseCase', () => {
       const useCase = registerUserUseCase(userRepository);
 
       await useCase({
-        id: 'user-1',
         name: 'Jane Doe',
         email: 'example@example.com',
         password: 'valid-password',
@@ -102,7 +99,6 @@ describe('RegisterUserUseCase', () => {
 
       await expect(
         useCase({
-          id: 'user-1',
           name: 'Jane Doe',
           email: 'example@example.com',
           password: 'valid-password',

@@ -3,14 +3,14 @@ import { UserRepository } from '@/core/domain/User/UserRepository';
 import { UserProps } from '@/core/domain/User/user.types';
 import bcrypt from 'bcryptjs';
 
-export type RegisterUserDTO = Omit<UserProps, 'passwordHash'> & {
+export type RegisterUserProps = Omit<UserProps, 'passwordHash' | 'id'> & {
   password: string;
 };
 
 export class RegisterUserUseCase {
   constructor(private userRepository: UserRepository) {}
 
-  async execute(data: RegisterUserDTO): Promise<void> {
+  async execute(data: RegisterUserProps): Promise<void> {
     const userExists = await this.userRepository.findByEmail(data.email);
     if (userExists) {
       throw new Error('User already exists');
@@ -20,7 +20,7 @@ export class RegisterUserUseCase {
     const passwordHash = await bcrypt.hash(data.password, salt);
 
     const user = new User({
-      id: data.id,
+      id: crypto.randomUUID(),
       name: data.name,
       email: data.email,
       passwordHash,
