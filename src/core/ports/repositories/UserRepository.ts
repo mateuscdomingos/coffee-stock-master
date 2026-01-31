@@ -1,5 +1,5 @@
-import { User } from './User.class';
-import { User as UserType } from './user.types';
+import { User } from '@/core/domain/User/User.class';
+import { User as UserType } from '@/core/domain/User/user.types';
 
 export interface UserRepository {
   save(user: User): Promise<void>;

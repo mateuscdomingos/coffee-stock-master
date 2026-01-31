@@ -1,5 +1,5 @@
-import { Store } from './Store.class';
-import { Store as StoryType } from './store.types';
+import { Store } from '@/core/domain/Store/Store.class';
+import { Store as StoryType } from '@/core/domain/Store/store.types';
 
 export interface StoreRepository {
   save(store: Store): Promise<void>;

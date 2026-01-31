@@ -1,6 +1,6 @@
-import { UserRepository } from '@/core/domain/User/UserRepository';
 import { User } from '@/core/domain/User/User.class';
 import { prisma } from './prisma-client';
+import { UserRepository } from '@/core/ports/repositories/UserRepository';
 
 export class PrismaUserRepository implements UserRepository {
   private prisma = prisma;

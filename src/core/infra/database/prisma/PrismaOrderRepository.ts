@@ -1,7 +1,7 @@
 import { Order } from '@/core/domain/Order/Order.class';
-import { OrderRepository } from '@/core/domain/Order/OrderRepository';
 import { OrderStatus } from '@/core/domain/Order/order.types';
 import { prisma } from './prisma-client';
+import { OrderRepository } from '@/core/ports/repositories/OrderRepository';
 
 export class PrismaOrderRepository implements OrderRepository {
   private prisma = prisma;

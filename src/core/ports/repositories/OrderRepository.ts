@@ -1,5 +1,5 @@
-import { Order } from './Order.class';
-import { Order as OrderType } from './order.types';
+import { Order } from '@/core/domain/Order/Order.class';
+import { Order as OrderType } from '@/core/domain/Order/order.types';
 
 export interface OrderRepository {
   save(order: Order): Promise<void>;
