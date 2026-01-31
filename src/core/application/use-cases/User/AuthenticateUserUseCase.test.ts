@@ -1,7 +1,7 @@
 import {
   UserRepository,
   UserRepositoryFN,
-} from '@/core/domain/User/UserRepository';
+} from '@/core/ports/repositories/UserRepository';
 import bcrypt from 'bcryptjs';
 import { AuthenticateUserUseCase } from './AuthenticateUserUseCase.class';
 import { User } from '@/core/domain/User/User.class';

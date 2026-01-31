@@ -1,7 +1,7 @@
-import { UserRepositoryFN } from '@/core/domain/User/UserRepository';
 import { UserProps } from '@/core/domain/User/user.types';
 import { createUser } from '@/core/domain/User/user.fn';
 import bcrypt from 'bcryptjs';
+import { UserRepositoryFN } from '@/core/ports/repositories/UserRepository';
 
 export type RegisterUserProps = Omit<UserProps, 'passwordHash' | 'id'> & {
   password: string;

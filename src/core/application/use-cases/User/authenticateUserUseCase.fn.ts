@@ -1,4 +1,4 @@
-import { UserRepositoryFN } from '@/core/domain/User/UserRepository';
+import { UserRepositoryFN } from '@/core/ports/repositories/UserRepository';
 import bcrypt from 'bcryptjs';
 
 export type AuthenticateUserDTO = {

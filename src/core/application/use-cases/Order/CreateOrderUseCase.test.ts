@@ -1,12 +1,12 @@
 import {
   OrderRepository,
   OrderRepositoryFN,
-} from '@/core/domain/Order/OrderRepository';
+} from '@/core/ports/repositories/OrderRepository';
 import { CreateOrderUseCase } from './CreateOrderUseCase.class';
 import {
   StoreRepository,
   StoreRepositoryFN,
-} from '@/core/domain/Store/StoreRepository';
+} from '@/core/ports/repositories/StoreRepository';
 import { DateProvider } from '../../providers/DateProvider';
 import { Order } from '@/core/domain/Order/Order.class';
 import { createOrderUseCase } from './createOrderUseCase.fn';
