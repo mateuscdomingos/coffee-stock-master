@@ -8,8 +8,13 @@ import { User } from '@/core/domain/User/User.class';
 import { User as UserType } from '@/core/domain/User/user.types';
 import { authenticateUserUseCase } from './authenticateUserUseCase.fn';
 import { Hasher } from '@/core/ports/auth/Hasher';
+import { Logger } from '@/core/ports/services/Logger';
 
 describe('AuthenticateUserUseCase', () => {
+  const logger: Logger = {
+    error: jest.fn(),
+    info: jest.fn(),
+  };
   describe('Paradigm: Object-Oriented (OOP)', () => {
     describe('execute', () => {
       let userRepository: UserRepository;
@@ -34,7 +39,11 @@ describe('AuthenticateUserUseCase', () => {
       });
 
       it('should authenticate a user with valid credentials', async () => {
-        const useCase = new AuthenticateUserUseCase(userRepository, hasher);
+        const useCase = new AuthenticateUserUseCase(
+          userRepository,
+          hasher,
+          logger,
+        );
 
         const result = await useCase.execute({
           email: 'example@example.com',
@@ -60,7 +69,11 @@ describe('AuthenticateUserUseCase', () => {
           save: jest.fn(),
         };
 
-        const useCase = new AuthenticateUserUseCase(userRepository, hasher);
+        const useCase = new AuthenticateUserUseCase(
+          userRepository,
+          hasher,
+          logger,
+        );
 
         await expect(
           useCase.execute({
@@ -83,7 +96,11 @@ describe('AuthenticateUserUseCase', () => {
           save: jest.fn(),
         };
 
-        const useCase = new AuthenticateUserUseCase(userRepository, hasher);
+        const useCase = new AuthenticateUserUseCase(
+          userRepository,
+          hasher,
+          logger,
+        );
 
         await expect(
           useCase.execute({
@@ -120,7 +137,7 @@ describe('AuthenticateUserUseCase', () => {
     });
 
     it('should authenticate a user with valid credentials', async () => {
-      const useCase = authenticateUserUseCase(userRepository, hasher);
+      const useCase = authenticateUserUseCase(userRepository, hasher, logger);
 
       const result = await useCase({
         email: 'example@example.com',
@@ -146,7 +163,7 @@ describe('AuthenticateUserUseCase', () => {
         save: jest.fn(),
       };
 
-      const useCase = authenticateUserUseCase(userRepository, hasher);
+      const useCase = authenticateUserUseCase(userRepository, hasher, logger);
 
       await expect(
         useCase({
@@ -169,7 +186,7 @@ describe('AuthenticateUserUseCase', () => {
         hash: jest.fn(),
       };
 
-      const useCase = authenticateUserUseCase(userRepository, hasher);
+      const useCase = authenticateUserUseCase(userRepository, hasher, logger);
 
       await expect(
         useCase({

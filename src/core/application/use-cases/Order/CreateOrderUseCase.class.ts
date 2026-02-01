@@ -2,15 +2,20 @@ import { Order } from '@/core/domain/Order/Order.class';
 import { DateProvider } from '../../providers/DateProvider';
 import { OrderRepository } from '@/core/ports/repositories/OrderRepository';
 import { StoreRepository } from '@/core/ports/repositories/StoreRepository';
+import { Logger } from '@/core/ports/services/Logger';
 
 export class CreateOrderUseCase {
   constructor(
     private readonly orderRepo: OrderRepository,
     private readonly storeRepo: StoreRepository,
     private readonly dateProvider: DateProvider,
+    private readonly logger: Logger,
   ) {}
 
   execute = async (order: Order) => {
+    this.logger.info('CreateOrderUseCase', 'Initial order creation', {
+      storeId: order.props.storeId,
+    });
     const { start, end } = this.dateProvider.getRangeOfMonth(
       this.dateProvider.now(),
     );
@@ -21,12 +26,24 @@ export class CreateOrderUseCase {
     ]);
 
     if (!store) {
+      this.logger.error('CreateOrderUseCase', 'Store not found', {
+        storeId: order.props.storeId,
+      });
       throw new Error('Store not found');
     }
 
     const spending = currentMonthSpendingInCents ?? 0;
-    order.validate(spending, store.props.monthlyBudgetInCents);
+
+    try {
+      order.validate(spending, store.props.monthlyBudgetInCents);
+    } catch (error) {
+      this.logger.error('CreateOrderUseCase', 'Order validation failed', error);
+      throw error;
+    }
 
     await this.orderRepo.save(order);
+    this.logger.info('CreateOrderUseCase', 'Order saved successfully', {
+      orderId: order.props.id,
+    });
   };
 }

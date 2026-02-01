@@ -7,8 +7,13 @@ import { User } from '@/core/domain/User/User.class';
 import bcrypt from 'bcryptjs';
 import { registerUserUseCase } from './registerUserUseCase.fn';
 import { Hasher } from '@/core/ports/auth/Hasher';
+import { Logger } from '@/core/ports/services/Logger';
 
 describe('RegisterUserUseCase', () => {
+  const logger: Logger = {
+    error: jest.fn(),
+    info: jest.fn(),
+  };
   describe('Paradigm: Object-Oriented (OOP)', () => {
     describe('execute', () => {
       let userRepository: UserRepository;
@@ -27,7 +32,7 @@ describe('RegisterUserUseCase', () => {
       });
 
       it('should register a new user', async () => {
-        const useCase = new RegisterUserUseCase(userRepository, hasher);
+        const useCase = new RegisterUserUseCase(userRepository, hasher, logger);
 
         await useCase.execute({
           name: 'Jane Doe',
@@ -53,7 +58,7 @@ describe('RegisterUserUseCase', () => {
           save: jest.fn(),
         };
 
-        const useCase = new RegisterUserUseCase(userRepository, hasher);
+        const useCase = new RegisterUserUseCase(userRepository, hasher, logger);
 
         await expect(
           useCase.execute({
@@ -85,7 +90,7 @@ describe('RegisterUserUseCase', () => {
     });
 
     it('should register a new user', async () => {
-      const useCase = registerUserUseCase(userRepository, hasher);
+      const useCase = registerUserUseCase(userRepository, hasher, logger);
 
       await useCase({
         name: 'Jane Doe',
@@ -109,7 +114,7 @@ describe('RegisterUserUseCase', () => {
         save: jest.fn(),
       };
 
-      const useCase = registerUserUseCase(userRepository, hasher);
+      const useCase = registerUserUseCase(userRepository, hasher, logger);
 
       await expect(
         useCase({

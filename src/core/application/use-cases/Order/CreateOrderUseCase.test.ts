@@ -11,6 +11,7 @@ import { DateProvider } from '../../providers/DateProvider';
 import { Order } from '@/core/domain/Order/Order.class';
 import { createOrderUseCase } from './createOrderUseCase.fn';
 import * as orderFP from '@/core/domain/Order/order.fn';
+import { Logger } from '@/core/ports/services/Logger';
 
 describe('CreateOrderUseCase', () => {
   describe('Paradigm: Object-Oriented (OOP)', () => {
@@ -18,6 +19,7 @@ describe('CreateOrderUseCase', () => {
       let orderRepo: OrderRepository;
       let storeRepo: StoreRepository;
       let dateProvider: DateProvider;
+      let logger: Logger;
 
       beforeEach(() => {
         orderRepo = {
@@ -38,6 +40,10 @@ describe('CreateOrderUseCase', () => {
             .mockReturnValue({ start: new Date(), end: new Date() }),
           now: jest.fn(),
         };
+        logger = {
+          error: jest.fn(),
+          info: jest.fn(),
+        };
       });
 
       it('should create an order', async () => {
@@ -45,6 +51,7 @@ describe('CreateOrderUseCase', () => {
           orderRepo,
           storeRepo,
           dateProvider,
+          logger,
         );
 
         const orderItem = {
@@ -81,6 +88,7 @@ describe('CreateOrderUseCase', () => {
             orderRepo,
             storeRepo,
             dateProvider,
+            logger,
           );
 
           const order = new Order({
@@ -104,6 +112,7 @@ describe('CreateOrderUseCase', () => {
     let orderRepo: OrderRepositoryFN;
     let storeRepo: StoreRepositoryFN;
     let dateProvider: DateProvider;
+    let logger: Logger;
 
     beforeEach(() => {
       orderRepo = {
@@ -124,10 +133,19 @@ describe('CreateOrderUseCase', () => {
           .mockReturnValue({ start: new Date(), end: new Date() }),
         now: jest.fn(),
       };
+      logger = {
+        error: jest.fn(),
+        info: jest.fn(),
+      };
     });
 
     it('should create an order', async () => {
-      const useCase = createOrderUseCase(orderRepo, storeRepo, dateProvider);
+      const useCase = createOrderUseCase(
+        orderRepo,
+        storeRepo,
+        dateProvider,
+        logger,
+      );
 
       const orderItem = {
         productId: 'prod-1',
@@ -161,7 +179,12 @@ describe('CreateOrderUseCase', () => {
           save: jest.fn(),
         };
 
-        const useCase = createOrderUseCase(orderRepo, storeRepo, dateProvider);
+        const useCase = createOrderUseCase(
+          orderRepo,
+          storeRepo,
+          dateProvider,
+          logger,
+        );
 
         const orderItem = {
           productId: 'prod-1',
