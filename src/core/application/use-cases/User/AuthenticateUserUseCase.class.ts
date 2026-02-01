@@ -1,5 +1,5 @@
+import { Hasher } from '@/core/ports/auth/Hasher';
 import { UserRepository } from '@/core/ports/repositories/UserRepository';
-import bcrypt from 'bcryptjs';
 
 export type AuthenticateUserDTO = {
   email: string;
@@ -7,7 +7,10 @@ export type AuthenticateUserDTO = {
 };
 
 export class AuthenticateUserUseCase {
-  constructor(private userRepository: UserRepository) {}
+  constructor(
+    private userRepository: UserRepository,
+    private hasher: Hasher,
+  ) {}
 
   async execute({ email, password }: AuthenticateUserDTO) {
     const user = await this.userRepository.findByEmail(email);
@@ -16,7 +19,7 @@ export class AuthenticateUserUseCase {
       throw new Error('Invalid credentials');
     }
 
-    const isPasswordValid = await bcrypt.compare(
+    const isPasswordValid = await this.hasher.compare(
       password,
       user.props.passwordHash,
     );

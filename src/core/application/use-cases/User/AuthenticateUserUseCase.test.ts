@@ -7,16 +7,18 @@ import { AuthenticateUserUseCase } from './AuthenticateUserUseCase.class';
 import { User } from '@/core/domain/User/User.class';
 import { User as UserType } from '@/core/domain/User/user.types';
 import { authenticateUserUseCase } from './authenticateUserUseCase.fn';
+import { Hasher } from '@/core/ports/auth/Hasher';
 
 describe('AuthenticateUserUseCase', () => {
   describe('Paradigm: Object-Oriented (OOP)', () => {
     describe('execute', () => {
       let userRepository: UserRepository;
+      let hasher: Hasher;
       const user = new User({
         id: 'user-1',
         name: 'John Doe',
         email: 'example@example.com',
-        passwordHash: bcrypt.hashSync('valid-password', 6),
+        passwordHash: 'passwordHash',
       });
 
       beforeEach(() => {
@@ -25,15 +27,24 @@ describe('AuthenticateUserUseCase', () => {
           findById: jest.fn(),
           save: jest.fn(),
         };
+        hasher = {
+          compare: jest.fn().mockResolvedValue(true),
+          hash: jest.fn(),
+        };
       });
 
       it('should authenticate a user with valid credentials', async () => {
-        const useCase = new AuthenticateUserUseCase(userRepository);
+        const useCase = new AuthenticateUserUseCase(userRepository, hasher);
 
         const result = await useCase.execute({
           email: 'example@example.com',
           password: 'valid-password',
         });
+
+        expect(hasher.compare).toHaveBeenCalledWith(
+          'valid-password',
+          user.props.passwordHash,
+        );
 
         expect(result).toEqual({
           id: 'user-1',
@@ -49,7 +60,7 @@ describe('AuthenticateUserUseCase', () => {
           save: jest.fn(),
         };
 
-        const useCase = new AuthenticateUserUseCase(userRepository);
+        const useCase = new AuthenticateUserUseCase(userRepository, hasher);
 
         await expect(
           useCase.execute({
@@ -62,13 +73,17 @@ describe('AuthenticateUserUseCase', () => {
       });
 
       it('should throw an error for invalid password', async () => {
+        const hasher = {
+          compare: jest.fn().mockResolvedValue(false),
+          hash: jest.fn(),
+        };
         const userRepository: UserRepository = {
           findByEmail: jest.fn().mockResolvedValue(user),
           findById: jest.fn(),
           save: jest.fn(),
         };
 
-        const useCase = new AuthenticateUserUseCase(userRepository);
+        const useCase = new AuthenticateUserUseCase(userRepository, hasher);
 
         await expect(
           useCase.execute({
@@ -83,6 +98,7 @@ describe('AuthenticateUserUseCase', () => {
   });
 
   describe('Paradigm: Functional Programming (FP)', () => {
+    let hasher: Hasher;
     let userRepository: UserRepositoryFN;
     const user: UserType = {
       id: 'user-1',
@@ -97,15 +113,24 @@ describe('AuthenticateUserUseCase', () => {
         findById: jest.fn(),
         save: jest.fn(),
       };
+      hasher = {
+        compare: jest.fn().mockResolvedValue(true),
+        hash: jest.fn(),
+      };
     });
 
     it('should authenticate a user with valid credentials', async () => {
-      const useCase = authenticateUserUseCase(userRepository);
+      const useCase = authenticateUserUseCase(userRepository, hasher);
 
       const result = await useCase({
         email: 'example@example.com',
         password: 'valid-password',
       });
+
+      expect(hasher.compare).toHaveBeenCalledWith(
+        'valid-password',
+        user.passwordHash,
+      );
 
       expect(result).toEqual({
         id: 'user-1',
@@ -121,7 +146,7 @@ describe('AuthenticateUserUseCase', () => {
         save: jest.fn(),
       };
 
-      const useCase = authenticateUserUseCase(userRepository);
+      const useCase = authenticateUserUseCase(userRepository, hasher);
 
       await expect(
         useCase({
@@ -139,8 +164,12 @@ describe('AuthenticateUserUseCase', () => {
         findById: jest.fn(),
         save: jest.fn(),
       };
+      const hasher = {
+        compare: jest.fn().mockResolvedValue(false),
+        hash: jest.fn(),
+      };
 
-      const useCase = authenticateUserUseCase(userRepository);
+      const useCase = authenticateUserUseCase(userRepository, hasher);
 
       await expect(
         useCase({

@@ -1,5 +1,5 @@
+import { Hasher } from '@/core/ports/auth/Hasher';
 import { UserRepositoryFN } from '@/core/ports/repositories/UserRepository';
-import bcrypt from 'bcryptjs';
 
 export type AuthenticateUserDTO = {
   email: string;
@@ -7,7 +7,7 @@ export type AuthenticateUserDTO = {
 };
 
 export const authenticateUserUseCase =
-  (userRepository: UserRepositoryFN) =>
+  (userRepository: UserRepositoryFN, hasher: Hasher) =>
   async ({ email, password }: AuthenticateUserDTO) => {
     const user = await userRepository.findByEmail(email);
 
@@ -15,7 +15,7 @@ export const authenticateUserUseCase =
       throw new Error('Invalid credentials');
     }
 
-    const isPasswordValid = await bcrypt.compare(password, user.passwordHash);
+    const isPasswordValid = await hasher.compare(password, user.passwordHash);
 
     if (!isPasswordValid) {
       throw new Error('Invalid credentials');

@@ -6,11 +6,13 @@ import { RegisterUserUseCase } from './RegisterUserUseCase.class';
 import { User } from '@/core/domain/User/User.class';
 import bcrypt from 'bcryptjs';
 import { registerUserUseCase } from './registerUserUseCase.fn';
+import { Hasher } from '@/core/ports/auth/Hasher';
 
 describe('RegisterUserUseCase', () => {
   describe('Paradigm: Object-Oriented (OOP)', () => {
     describe('execute', () => {
       let userRepository: UserRepository;
+      let hasher: Hasher;
 
       beforeEach(() => {
         userRepository = {
@@ -18,16 +20,23 @@ describe('RegisterUserUseCase', () => {
           findById: jest.fn(),
           save: jest.fn(),
         };
+        hasher = {
+          compare: jest.fn(),
+          hash: jest.fn().mockResolvedValue('password'),
+        };
       });
 
       it('should register a new user', async () => {
-        const useCase = new RegisterUserUseCase(userRepository);
+        const useCase = new RegisterUserUseCase(userRepository, hasher);
 
         await useCase.execute({
           name: 'Jane Doe',
           email: 'example@example.com',
           password: 'valid-password',
         });
+
+        expect(hasher.hash).toHaveBeenCalledWith('valid-password');
+
         expect(userRepository.save).toHaveBeenCalled();
       });
 
@@ -44,7 +53,7 @@ describe('RegisterUserUseCase', () => {
           save: jest.fn(),
         };
 
-        const useCase = new RegisterUserUseCase(userRepository);
+        const useCase = new RegisterUserUseCase(userRepository, hasher);
 
         await expect(
           useCase.execute({
@@ -61,6 +70,7 @@ describe('RegisterUserUseCase', () => {
 
   describe('Paradigm: Functional Programming (FP)', () => {
     let userRepository: UserRepositoryFN;
+    let hasher: Hasher;
 
     beforeEach(() => {
       userRepository = {
@@ -68,10 +78,14 @@ describe('RegisterUserUseCase', () => {
         findById: jest.fn(),
         save: jest.fn(),
       };
+      hasher = {
+        compare: jest.fn(),
+        hash: jest.fn().mockResolvedValue('password'),
+      };
     });
 
     it('should register a new user', async () => {
-      const useCase = registerUserUseCase(userRepository);
+      const useCase = registerUserUseCase(userRepository, hasher);
 
       await useCase({
         name: 'Jane Doe',
@@ -95,7 +109,7 @@ describe('RegisterUserUseCase', () => {
         save: jest.fn(),
       };
 
-      const useCase = registerUserUseCase(userRepository);
+      const useCase = registerUserUseCase(userRepository, hasher);
 
       await expect(
         useCase({
