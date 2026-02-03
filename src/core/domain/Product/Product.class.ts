@@ -1,3 +1,4 @@
+import { FieldCannotBeNegative } from '../Error/Error.class';
 import { ProductProps } from './product.types';
 
 export class Product {
@@ -8,7 +9,7 @@ export class Product {
 
   private validateQuantity(quantity: number, fieldName: string): void {
     if (quantity < 0) {
-      throw new Error(`${fieldName} cannot be negative`);
+      throw new FieldCannotBeNegative(fieldName);
     }
   }
 

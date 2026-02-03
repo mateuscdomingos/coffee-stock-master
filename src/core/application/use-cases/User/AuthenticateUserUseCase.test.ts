@@ -9,6 +9,7 @@ import { User as UserType } from '@/core/domain/User/user.types';
 import { authenticateUserUseCase } from './authenticateUserUseCase.fn';
 import { Hasher } from '@/core/ports/auth/Hasher';
 import { Logger } from '@/core/ports/services/Logger';
+import { InvalidCredentialsError } from '@/core/domain/Error/Error.class';
 
 describe('AuthenticateUserUseCase', () => {
   const logger: Logger = {
@@ -80,7 +81,7 @@ describe('AuthenticateUserUseCase', () => {
             email: 'example@example.com',
             password: 'valid-password',
           }),
-        ).rejects.toThrow('Invalid credentials');
+        ).rejects.toBeInstanceOf(InvalidCredentialsError);
 
         expect(userRepository.save).not.toHaveBeenCalled();
       });
@@ -107,7 +108,7 @@ describe('AuthenticateUserUseCase', () => {
             email: 'example@example.com',
             password: 'wrong-password',
           }),
-        ).rejects.toThrow('Invalid credentials');
+        ).rejects.toBeInstanceOf(InvalidCredentialsError);
 
         expect(userRepository.save).not.toHaveBeenCalled();
       });
@@ -170,7 +171,7 @@ describe('AuthenticateUserUseCase', () => {
           email: 'example@example.com',
           password: 'valid-password',
         }),
-      ).rejects.toThrow('Invalid credentials');
+      ).rejects.toBeInstanceOf(InvalidCredentialsError);
 
       expect(userRepository.save).not.toHaveBeenCalled();
     });
@@ -193,7 +194,7 @@ describe('AuthenticateUserUseCase', () => {
           email: 'example@example.com',
           password: 'wrong-password',
         }),
-      ).rejects.toThrow('Invalid credentials');
+      ).rejects.toBeInstanceOf(InvalidCredentialsError);
 
       expect(userRepository.save).not.toHaveBeenCalled();
     });

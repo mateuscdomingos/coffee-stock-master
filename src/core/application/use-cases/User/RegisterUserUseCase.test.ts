@@ -8,6 +8,7 @@ import bcrypt from 'bcryptjs';
 import { registerUserUseCase } from './registerUserUseCase.fn';
 import { Hasher } from '@/core/ports/auth/Hasher';
 import { Logger } from '@/core/ports/services/Logger';
+import { UserAlreadyExistsError } from '@/core/domain/Error/Error.class';
 
 describe('RegisterUserUseCase', () => {
   const logger: Logger = {
@@ -66,7 +67,7 @@ describe('RegisterUserUseCase', () => {
             email: 'example@example.com',
             password: 'valid-password',
           }),
-        ).rejects.toThrow('User already exists');
+        ).rejects.toBeInstanceOf(UserAlreadyExistsError);
 
         expect(userRepository.save).not.toHaveBeenCalled();
       });
@@ -122,7 +123,7 @@ describe('RegisterUserUseCase', () => {
           email: 'example@example.com',
           password: 'valid-password',
         }),
-      ).rejects.toThrow('User already exists');
+      ).rejects.toBeInstanceOf(UserAlreadyExistsError);
 
       expect(userRepository.save).not.toHaveBeenCalled();
     });

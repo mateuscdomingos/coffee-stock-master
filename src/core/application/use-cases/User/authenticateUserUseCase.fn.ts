@@ -1,3 +1,4 @@
+import { InvalidCredentialsError } from '@/core/domain/Error/Error.class';
 import { Hasher } from '@/core/ports/auth/Hasher';
 import { UserRepositoryFN } from '@/core/ports/repositories/UserRepository';
 import { Logger } from '@/core/ports/services/Logger';
@@ -19,7 +20,7 @@ export const authenticateUserUseCase =
       logger.error('AuthenticateUserUseCase', 'User not found at login', {
         email,
       });
-      throw new Error('Invalid credentials');
+      throw new InvalidCredentialsError();
     }
 
     const isPasswordValid = await hasher.compare(password, user.passwordHash);
@@ -28,7 +29,7 @@ export const authenticateUserUseCase =
       logger.error('AuthenticateUserUseCase', 'Incorrect password', {
         email,
       });
-      throw new Error('Invalid credentials');
+      throw new InvalidCredentialsError();
     }
 
     logger.info('AuthenticateUserUseCase', 'User successfully authenticated', {

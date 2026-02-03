@@ -1,3 +1,4 @@
+import { FieldCannotBeNegative } from '../Error/Error.class';
 import { StoreProps } from './store.types';
 
 export class Store {
@@ -7,7 +8,7 @@ export class Store {
 
   private validateMonthlyBudget(monthlyBudgetInCents: number): void {
     if (monthlyBudgetInCents < 0) {
-      throw new Error('Monthly budget cannot be negative');
+      throw new FieldCannotBeNegative(monthlyBudgetInCents.toString());
     }
   }
 

@@ -3,6 +3,7 @@ import { DateProvider } from '../../providers/DateProvider';
 import { OrderRepository } from '@/core/ports/repositories/OrderRepository';
 import { StoreRepository } from '@/core/ports/repositories/StoreRepository';
 import { Logger } from '@/core/ports/services/Logger';
+import { StoreNotFoundError } from '@/core/domain/Error/Error.class';
 
 export class CreateOrderUseCase {
   constructor(
@@ -29,7 +30,7 @@ export class CreateOrderUseCase {
       this.logger.error('CreateOrderUseCase', 'Store not found', {
         storeId: order.props.storeId,
       });
-      throw new Error('Store not found');
+      throw new StoreNotFoundError(order.props.storeId);
     }
 
     const spending = currentMonthSpendingInCents ?? 0;

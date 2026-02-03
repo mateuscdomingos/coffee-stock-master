@@ -1,3 +1,4 @@
+import { InsufficientBudgetError } from '../Error/Error.class';
 import { Order, OrderItem, OrderProps, OrderStatus } from './order.types';
 
 export const createOrder = (props: OrderProps): Order => {
@@ -32,7 +33,10 @@ export const validateOrder = (
     currentMonthSpendingInCents + getTotalAmountInCents(order) >
     storeMonthlyBudgetInCents
   ) {
-    throw new Error('Monthly budget exceeded');
+    throw new InsufficientBudgetError(
+      currentMonthSpendingInCents,
+      storeMonthlyBudgetInCents,
+    );
   }
 };
 

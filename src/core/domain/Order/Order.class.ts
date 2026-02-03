@@ -1,3 +1,4 @@
+import { InsufficientBudgetError } from '../Error/Error.class';
 import { OrderItem, OrderProps, OrderStatus } from './order.types';
 
 export class Order {
@@ -30,7 +31,10 @@ export class Order {
       currentMonthSpendingInCents + this.totalAmountInCents >
       storeMonthlyBudgetInCents
     ) {
-      throw new Error('Monthly budget exceeded');
+      throw new InsufficientBudgetError(
+        currentMonthSpendingInCents,
+        storeMonthlyBudgetInCents,
+      );
     }
   }
 

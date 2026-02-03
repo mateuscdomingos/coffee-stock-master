@@ -39,7 +39,7 @@ describe('Domain: Product', () => {
               unit: 'kg',
               storeId: 'store-123',
             }),
-        ).toThrow('stockQuantity cannot be negative');
+        ).toThrow('"stockQuantity" cannot be negative');
       });
 
       it('should throw an error for negative minimum stock quantity', () => {
@@ -55,7 +55,7 @@ describe('Domain: Product', () => {
               unit: 'kg',
               storeId: 'store-123',
             }),
-        ).toThrow('minimumStockQuantity cannot be negative');
+        ).toThrow('"minimumStockQuantity" cannot be negative');
       });
     });
 
@@ -90,7 +90,7 @@ describe('Domain: Product', () => {
         });
 
         expect(() => product.updateStockQuantity(-10)).toThrow(
-          'stockQuantity cannot be negative',
+          '"stockQuantity" cannot be negative',
         );
       });
     });
@@ -126,7 +126,7 @@ describe('Domain: Product', () => {
         });
 
         expect(() => product.updateMinimumStockQuantity(-10)).toThrow(
-          'minimumStockQuantity cannot be negative',
+          '"minimumStockQuantity" cannot be negative',
         );
       });
     });
@@ -171,7 +171,7 @@ describe('Domain: Product', () => {
         };
 
         expect(() => productFP.createProduct(productProps)).toThrow(
-          'stockQuantity cannot be negative',
+          '"stockQuantity" cannot be negative',
         );
       });
 
@@ -188,7 +188,7 @@ describe('Domain: Product', () => {
         };
 
         expect(() => productFP.createProduct(productProps)).toThrow(
-          'minimumStockQuantity cannot be negative',
+          '"minimumStockQuantity" cannot be negative',
         );
       });
     });
@@ -228,7 +228,7 @@ describe('Domain: Product', () => {
         const product = productFP.createProduct(productProps);
 
         expect(() => productFP.updateStockQuantity(product, -50)).toThrow(
-          'stockQuantity cannot be negative',
+          '"stockQuantity" cannot be negative',
         );
       });
     });
@@ -272,7 +272,7 @@ describe('Domain: Product', () => {
 
         expect(() =>
           productFP.updateMinimumStockQuantity(product, -10),
-        ).toThrow('minimumStockQuantity cannot be negative');
+        ).toThrow('"minimumStockQuantity" cannot be negative');
       });
     });
   });

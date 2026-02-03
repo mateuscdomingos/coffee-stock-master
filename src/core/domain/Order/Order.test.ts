@@ -1,3 +1,4 @@
+import { InsufficientBudgetError } from '../Error/Error.class';
 import { Order } from './Order.class';
 import * as orderFP from './order.fn';
 
@@ -94,9 +95,9 @@ describe('Domain: Order', () => {
           employeeId: 'emp-456',
         });
 
-        expect(() => {
-          order.validate(5000, 10000);
-        }).toThrow('Monthly budget exceeded');
+        expect(() => order.validate(5000, 10000)).toThrow(
+          InsufficientBudgetError,
+        );
       });
     });
 
@@ -238,9 +239,9 @@ describe('Domain: Order', () => {
           employeeId: 'emp-456',
         });
 
-        expect(() => {
-          orderFP.validateOrder(order, 5000, 10000);
-        }).toThrow('Monthly budget exceeded');
+        expect(() => orderFP.validateOrder(order, 5000, 10000)).toThrow(
+          InsufficientBudgetError,
+        );
       });
     });
 

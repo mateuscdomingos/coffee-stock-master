@@ -4,6 +4,7 @@ import { validateOrder } from '@/core/domain/Order/order.fn';
 import { OrderRepositoryFN } from '@/core/ports/repositories/OrderRepository';
 import { StoreRepositoryFN } from '@/core/ports/repositories/StoreRepository';
 import { Logger } from '@/core/ports/services/Logger';
+import { StoreNotFoundError } from '@/core/domain/Error/Error.class';
 
 export const createOrderUseCase =
   (
@@ -27,7 +28,7 @@ export const createOrderUseCase =
       logger.error('CreateOrderUseCase', 'Store not found', {
         storeId: order.storeId,
       });
-      throw new Error('Store not found');
+      throw new StoreNotFoundError(order.storeId);
     }
 
     const spending = currentMonthSpendingInCents ?? 0;

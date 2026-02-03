@@ -12,6 +12,7 @@ import { Order } from '@/core/domain/Order/Order.class';
 import { createOrderUseCase } from './createOrderUseCase.fn';
 import * as orderFP from '@/core/domain/Order/order.fn';
 import { Logger } from '@/core/ports/services/Logger';
+import { StoreNotFoundError } from '@/core/domain/Error/Error.class';
 
 describe('CreateOrderUseCase', () => {
   describe('Paradigm: Object-Oriented (OOP)', () => {
@@ -100,8 +101,8 @@ describe('CreateOrderUseCase', () => {
             employeeId: 'emp-456',
           });
 
-          await expect(useCase.execute(order)).rejects.toThrow(
-            'Store not found',
+          await expect(useCase.execute(order)).rejects.toBeInstanceOf(
+            StoreNotFoundError,
           );
         });
       });
@@ -202,7 +203,7 @@ describe('CreateOrderUseCase', () => {
           employeeId: 'emp-456',
         });
 
-        await expect(useCase(order)).rejects.toThrow('Store not found');
+        await expect(useCase(order)).rejects.toBeInstanceOf(StoreNotFoundError);
       });
     });
   });
