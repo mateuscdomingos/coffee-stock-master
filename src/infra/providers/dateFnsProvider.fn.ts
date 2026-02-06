@@ -1,4 +1,4 @@
-import { DateProvider } from '@/core/application/providers/DateProvider';
+import { DateProvider } from '@/core/ports/services/DateProvider';
 import { startOfMonth, endOfMonth } from 'date-fns';
 
 const now = () => new Date();

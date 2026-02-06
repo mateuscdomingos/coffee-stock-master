@@ -1,5 +1,5 @@
 import { InvalidCredentialsError } from '@/core/domain/Error/Error.class';
-import { Hasher } from '@/core/ports/auth/Hasher';
+import { Hasher } from '@/core/ports/services/Hasher';
 import { UserRepositoryFN } from '@/core/ports/repositories/UserRepository';
 import { Logger } from '@/core/ports/services/Logger';
 

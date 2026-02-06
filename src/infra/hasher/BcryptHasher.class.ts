@@ -1,4 +1,4 @@
-import { Hasher } from '@/core/ports/auth/Hasher';
+import { Hasher } from '@/core/ports/services/Hasher';
 import bcrypt from 'bcryptjs';
 
 export class BcryptHasher implements Hasher {

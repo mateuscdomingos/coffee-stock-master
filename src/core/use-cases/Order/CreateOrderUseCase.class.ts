@@ -1,9 +1,9 @@
 import { Order } from '@/core/domain/Order/Order.class';
-import { DateProvider } from '../../providers/DateProvider';
 import { OrderRepository } from '@/core/ports/repositories/OrderRepository';
 import { StoreRepository } from '@/core/ports/repositories/StoreRepository';
 import { Logger } from '@/core/ports/services/Logger';
 import { StoreNotFoundError } from '@/core/domain/Error/Error.class';
+import { DateProvider } from '@/core/ports/services/DateProvider';
 
 export class CreateOrderUseCase {
   constructor(

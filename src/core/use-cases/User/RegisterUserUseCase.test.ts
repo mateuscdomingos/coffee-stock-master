@@ -6,7 +6,7 @@ import { RegisterUserUseCase } from './RegisterUserUseCase.class';
 import { User } from '@/core/domain/User/User.class';
 import bcrypt from 'bcryptjs';
 import { registerUserUseCase } from './registerUserUseCase.fn';
-import { Hasher } from '@/core/ports/auth/Hasher';
+import { Hasher } from '@/core/ports/services/Hasher';
 import { Logger } from '@/core/ports/services/Logger';
 import { UserAlreadyExistsError } from '@/core/domain/Error/Error.class';
 

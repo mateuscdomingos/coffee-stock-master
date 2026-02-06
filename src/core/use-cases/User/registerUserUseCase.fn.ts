@@ -1,7 +1,7 @@
 import { UserProps } from '@/core/domain/User/user.types';
 import { createUser } from '@/core/domain/User/user.fn';
 import { UserRepositoryFN } from '@/core/ports/repositories/UserRepository';
-import { Hasher } from '@/core/ports/auth/Hasher';
+import { Hasher } from '@/core/ports/services/Hasher';
 import { Logger } from '@/core/ports/services/Logger';
 import { UserAlreadyExistsError } from '@/core/domain/Error/Error.class';
 

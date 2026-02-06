@@ -7,7 +7,7 @@ import { AuthenticateUserUseCase } from './AuthenticateUserUseCase.class';
 import { User } from '@/core/domain/User/User.class';
 import { User as UserType } from '@/core/domain/User/user.types';
 import { authenticateUserUseCase } from './authenticateUserUseCase.fn';
-import { Hasher } from '@/core/ports/auth/Hasher';
+import { Hasher } from '@/core/ports/services/Hasher';
 import { Logger } from '@/core/ports/services/Logger';
 import { InvalidCredentialsError } from '@/core/domain/Error/Error.class';
 

@@ -1,4 +1,4 @@
-import { Hasher } from '@/core/ports/auth/Hasher';
+import { Hasher } from '@/core/ports/services/Hasher';
 import bcrypt from 'bcryptjs';
 
 const hash = async (value: string): Promise<string> => {

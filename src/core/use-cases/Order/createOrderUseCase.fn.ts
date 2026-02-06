@@ -1,10 +1,10 @@
 import { Order } from '@/core/domain/Order/order.types';
-import { DateProvider } from '../../providers/DateProvider';
 import { validateOrder } from '@/core/domain/Order/order.fn';
 import { OrderRepositoryFN } from '@/core/ports/repositories/OrderRepository';
 import { StoreRepositoryFN } from '@/core/ports/repositories/StoreRepository';
 import { Logger } from '@/core/ports/services/Logger';
 import { StoreNotFoundError } from '@/core/domain/Error/Error.class';
+import { DateProvider } from '@/core/ports/services/DateProvider';
 
 export const createOrderUseCase =
   (
