@@ -1,5 +1,7 @@
 import type { Preview } from '@storybook/nextjs-vite';
 import '../src/app/globals.css';
+import { NextIntlClientProvider } from 'next-intl';
+import en from '../src/messages/en.json';
 
 const preview: Preview = {
   parameters: {
@@ -17,6 +19,13 @@ const preview: Preview = {
       test: 'todo',
     },
   },
+  decorators: [
+    (Story) => (
+      <NextIntlClientProvider locale="en" messages={en}>
+        <Story />
+      </NextIntlClientProvider>
+    ),
+  ],
 };
 
 export default preview;
