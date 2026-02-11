@@ -1,5 +1,5 @@
 import { render, screen } from '@/test/test-utils';
-import { RegisterPage } from './page';
+import RegisterPage from './page';
 
 jest.mock('@/app/actions/auth-actions', () => ({
   handleRegister: jest.fn(),

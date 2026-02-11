@@ -2,7 +2,7 @@ import { BaseCard } from '@/components/auth/base-card';
 import { RegisterForm } from '@/components/auth/register-form';
 import { getTranslations } from 'next-intl/server';
 
-export async function RegisterPage() {
+export default async function RegisterPage() {
   const t = await getTranslations('registerPage');
 
   return (
