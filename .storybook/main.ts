@@ -15,14 +15,20 @@ const config: StorybookConfig = {
     '@storybook/addon-onboarding',
   ],
   framework: '@storybook/nextjs-vite',
+  features: {
+    experimentalRSC: true,
+  },
   staticDirs: ['../public'],
   viteFinal: async (config) => {
     config.resolve = config.resolve || {};
 
     const mockPath = path.resolve(__dirname, 'mocks/empty-module.ts');
     const actionMockPath = path.resolve(__dirname, 'mocks/auth-actions.ts');
+    const serverMockPath = path.resolve(__dirname, 'mocks/next-intl-server.ts');
 
     config.resolve.alias = [
+      { find: 'next-intl/server', replacement: serverMockPath },
+
       { find: '@/app/actions/auth-actions', replacement: actionMockPath },
       { find: /.*\/prisma\/generated\/client/, replacement: mockPath },
       { find: /^@prisma\/client/, replacement: mockPath },

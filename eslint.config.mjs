@@ -15,6 +15,18 @@ const eslintConfig = defineConfig([
     },
     rules: {
       'prettier/prettier': 'error',
+      'no-restricted-imports': [
+        'error',
+        {
+          paths: [
+            {
+              name: '@testing-library/react',
+              message:
+                "Please use the custom renderer from '@/test/test-utils'.",
+            },
+          ],
+        },
+      ],
 
       ...prettierConfig.rules,
     },

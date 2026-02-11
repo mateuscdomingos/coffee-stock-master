@@ -1,4 +1,3 @@
-// .storybook/mocks/empty-module.ts
 export class PrismaClient {}
 export class Pool {}
 export class PrismaPg {}
