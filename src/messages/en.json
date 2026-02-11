@@ -1,5 +1,21 @@
 {
   "registerPage": {
+    "description": "Enter your information below to create your account.",
     "title": "Create an account"
+  },
+  "components": {
+    "auth": {
+      "registerForm": {
+        "alreadyHaveAnAccount": "Already have an account? <SignInLink>Sign in</SignInLink>",
+        "confirmPassword": "Confirm Password",
+        "confirmPasswordDescription": "Please confirm your password.",
+        "createAccount": "Create Account",
+        "email": "Email",
+        "emailDescription": "We'll use this to contact you. We will not share your email with anyone else.",
+        "fullName": "Full Name",
+        "password": "Password",
+        "passwordDescription": "Must be at least 8 characters long."
+      }
+    }
   }
 }

@@ -1,0 +1,22 @@
+{
+  "cSpell:disable": true,
+  "registerPage": {
+    "description": "Insira suas informações abaixo para criar sua conta.",
+    "title": "Criar uma conta"
+  },
+  "components": {
+    "auth": {
+      "registerForm": {
+        "alreadyHaveAnAccount": "Já tem uma conta? <SignInLink>Faça login</SignInLink>",
+        "confirmPassword": "Confirmar Senha",
+        "confirmPasswordDescription": "Por favor, confirme sua senha.",
+        "createAccount": "Criar Conta",
+        "email": "E-mail",
+        "emailDescription": "Usaremos isso para entrar em contato. Não compartilharemos seu e-mail com ninguém.",
+        "fullName": "Nome Completo",
+        "password": "Senha",
+        "passwordDescription": "Deve ter pelo menos 8 caracteres."
+      }
+    }
+  }
+}
