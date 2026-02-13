@@ -26,7 +26,7 @@ export function RegisterForm() {
             id="name"
             name="name"
             type="text"
-            placeholder="John Doe"
+            placeholder="Mateus Domingos"
             required
           />
         </Field>

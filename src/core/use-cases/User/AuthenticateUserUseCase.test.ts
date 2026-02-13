@@ -22,7 +22,7 @@ describe('AuthenticateUserUseCase', () => {
       let hasher: Hasher;
       const user = new User({
         id: 'user-1',
-        name: 'John Doe',
+        name: 'Mateus Domingos',
         email: 'example@example.com',
         passwordHash: 'passwordHash',
       });
@@ -58,7 +58,7 @@ describe('AuthenticateUserUseCase', () => {
 
         expect(result).toEqual({
           id: 'user-1',
-          name: 'John Doe',
+          name: 'Mateus Domingos',
           email: 'example@example.com',
         });
       });
@@ -120,7 +120,7 @@ describe('AuthenticateUserUseCase', () => {
     let userRepository: UserRepositoryFN;
     const user: UserType = {
       id: 'user-1',
-      name: 'John Doe',
+      name: 'Mateus Domingos',
       email: 'example@example.com',
       passwordHash: bcrypt.hashSync('valid-password', 6),
     };
@@ -152,7 +152,7 @@ describe('AuthenticateUserUseCase', () => {
 
       expect(result).toEqual({
         id: 'user-1',
-        name: 'John Doe',
+        name: 'Mateus Domingos',
         email: 'example@example.com',
       });
     });

@@ -27,8 +27,8 @@ describe('handleRegister Server Action', () => {
 
   it('should return undefined error on success', async () => {
     const formData = createFormData({
-      name: 'John Doe',
-      email: 'john@example.com',
+      name: 'Mateus Domingos',
+      email: 'mateus@example.com',
       password: 'password123',
     });
 
@@ -36,8 +36,8 @@ describe('handleRegister Server Action', () => {
 
     expect(result).toEqual({ error: undefined });
     expect(mockExecute).toHaveBeenCalledWith({
-      name: 'John Doe',
-      email: 'john@example.com',
+      name: 'Mateus Domingos',
+      email: 'mateus@example.com',
       password: 'password123',
     });
   });
@@ -47,7 +47,7 @@ describe('handleRegister Server Action', () => {
       const domainError = new UserAlreadyExistsError();
       mockExecute.mockRejectedValue(domainError);
 
-      const formData = createFormData({ email: 'john@example.com' });
+      const formData = createFormData({ email: 'mateus@example.com' });
 
       const result = await handleRegister(undefined, formData);
       expect(result).toEqual({ error: domainError.message });

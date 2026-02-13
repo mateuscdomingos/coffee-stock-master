@@ -48,10 +48,13 @@ describe('RegisterForm', () => {
     it('should call handleRegister with form data when submitted', async () => {
       render(<RegisterForm />);
 
-      await userEvent.type(screen.getByLabelText('Full Name'), 'John Doe');
+      await userEvent.type(
+        screen.getByLabelText('Full Name'),
+        'Mateus Domingos',
+      );
       await userEvent.type(
         screen.getByRole('textbox', { name: 'Email' }),
-        'john@example.com',
+        'mateus@example.com',
       );
       await userEvent.type(screen.getByLabelText('Password'), 'password123');
       await userEvent.type(
@@ -72,8 +75,8 @@ describe('RegisterForm', () => {
       const [prevState, formData] = (handleRegister as jest.Mock).mock.calls[0];
 
       expect(prevState).toBeUndefined();
-      expect(formData.get('name')).toBe('John Doe');
-      expect(formData.get('email')).toBe('john@example.com');
+      expect(formData.get('name')).toBe('Mateus Domingos');
+      expect(formData.get('email')).toBe('mateus@example.com');
       expect(formData.get('password')).toBe('password123');
       expect(formData.get('confirmPassword')).toBe('password123');
     });

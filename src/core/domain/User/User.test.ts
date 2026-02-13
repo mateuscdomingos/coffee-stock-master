@@ -7,13 +7,13 @@ describe('Domain: User', () => {
       it('should create a User with valid properties', () => {
         const user = new User({
           id: 'user-123',
-          name: 'John Doe',
+          name: 'Mateus Domingos',
           email: 'john.doe@example.com',
           passwordHash: 'hashed-password',
         });
 
         expect(user.props.id).toBe('user-123');
-        expect(user.props.name).toBe('John Doe');
+        expect(user.props.name).toBe('Mateus Domingos');
         expect(user.props.email).toBe('john.doe@example.com');
         expect(user.props.passwordHash).toBe('hashed-password');
       });
@@ -22,7 +22,7 @@ describe('Domain: User', () => {
         expect(() => {
           new User({
             id: 'user-123',
-            name: 'John Doe',
+            name: 'Mateus Domingos',
             email: 'invalid-email',
             passwordHash: 'hashed-password',
           });
@@ -36,7 +36,7 @@ describe('Domain: User', () => {
       it('should create a User with valid properties', () => {
         const userProps = {
           id: 'user-123',
-          name: 'John Doe',
+          name: 'Mateus Domingos',
           email: 'john.doe@example.com',
           passwordHash: 'hashed-password',
         };
@@ -44,7 +44,7 @@ describe('Domain: User', () => {
         const user = createUser(userProps);
 
         expect(user.id).toBe('user-123');
-        expect(user.name).toBe('John Doe');
+        expect(user.name).toBe('Mateus Domingos');
         expect(user.email).toBe('john.doe@example.com');
         expect(user.passwordHash).toBe('hashed-password');
       });
@@ -53,7 +53,7 @@ describe('Domain: User', () => {
         expect(() => {
           createUser({
             id: 'user-123',
-            name: 'John Doe',
+            name: 'Mateus Domingos',
             email: 'invalid-email',
             passwordHash: 'hashed-password',
           });

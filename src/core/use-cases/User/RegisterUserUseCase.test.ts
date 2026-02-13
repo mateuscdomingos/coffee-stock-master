@@ -49,7 +49,7 @@ describe('RegisterUserUseCase', () => {
       it('should throw an error if email is already in use', async () => {
         const user = new User({
           id: 'user-1',
-          name: 'John Doe',
+          name: 'Mateus Domingos',
           email: 'example@example.com',
           passwordHash: bcrypt.hashSync('valid-password', 6),
         });
@@ -105,7 +105,7 @@ describe('RegisterUserUseCase', () => {
     it('should throw an error if email is already in use', async () => {
       const user = {
         id: 'user-1',
-        name: 'John Doe',
+        name: 'Mateus Domingos',
         email: 'example@example.com',
         passwordHash: bcrypt.hashSync('valid-password', 6),
       };
