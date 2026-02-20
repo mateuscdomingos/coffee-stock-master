@@ -4,7 +4,7 @@ import './globals.css';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { Header } from '@/components/layout/header';
-import { cookies } from 'next/headers';
+import { getLocale } from '@/i18n/locale';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -26,9 +26,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const cookieStore = await cookies();
-  const locale = cookieStore.get('NEXT_LOCALE')?.value || 'en';
-
+  const locale = await getLocale();
   const messages = await getMessages({ locale });
 
   return (
