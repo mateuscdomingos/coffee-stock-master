@@ -3,7 +3,10 @@ import { createUser } from '@/core/domain/User/user.fn';
 import { UserRepositoryFN } from '@/core/ports/repositories/UserRepository';
 import { Hasher } from '@/core/ports/services/Hasher';
 import { Logger } from '@/core/ports/services/Logger';
-import { UserAlreadyExistsError } from '@/core/domain/Error/Error.class';
+import {
+  InvalidPasswordError,
+  EmailAlreadyExistsError,
+} from '@/core/domain/Error/Error.class';
 
 export type RegisterUserProps = Omit<UserProps, 'passwordHash' | 'id'> & {
   password: string;
@@ -20,9 +23,12 @@ export const registerUserUseCase =
       logger.info('RegisterUserUseCase', 'The email already exists', {
         email: data.email,
       });
-      throw new UserAlreadyExistsError();
+      throw new EmailAlreadyExistsError();
     }
 
+    if (data.password.length < 8) {
+      throw new InvalidPasswordError();
+    }
     const passwordHash = await hasher.hash(data.password);
 
     const user = createUser({

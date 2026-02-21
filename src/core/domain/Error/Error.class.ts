@@ -9,9 +9,9 @@ abstract class DomainError extends Error {
 }
 
 // User Errors
-export class UserAlreadyExistsError extends DomainError {
+export class EmailAlreadyExistsError extends DomainError {
   constructor() {
-    super(`User already exists.`);
+    super(`Email already exists.`);
   }
 }
 
@@ -24,6 +24,12 @@ export class InvalidCredentialsError extends DomainError {
 export class InvalidEmailError extends DomainError {
   constructor() {
     super(`Invalid email format.`);
+  }
+}
+
+export class InvalidPasswordError extends DomainError {
+  constructor() {
+    super(`Invalid password.`);
   }
 }
 

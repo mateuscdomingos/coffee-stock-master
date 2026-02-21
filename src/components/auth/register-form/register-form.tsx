@@ -5,62 +5,157 @@ import { Button } from '@/components/ui/button';
 import {
   Field,
   FieldDescription,
+  FieldError,
   FieldGroup,
   FieldLabel,
 } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import { useActionState } from 'react';
+import { useActionState, useEffect } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { RegisterInput, registerSchema } from '@/lib/schemas/auth';
+import { EmailAlreadyExistsError } from '@/core/domain/Error/Error.class';
 
 export function RegisterForm() {
   const t = useTranslations('components.auth.registerForm');
   const [state, formAction] = useActionState(handleRegister, undefined);
+  const form = useForm<RegisterInput>({
+    resolver: zodResolver(registerSchema),
+    defaultValues: {
+      name: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+    },
+  });
+
+  useEffect(() => {
+    if (state?.error) {
+      Object.entries(state.error).forEach(([key, message]) => {
+        form.setError(key as keyof RegisterInput, {
+          type: 'server',
+          message: message as string,
+        });
+      });
+    }
+  }, [state, form]);
+
+  const onSubmit = (data: RegisterInput) => {
+    const formData = new FormData();
+    Object.entries(data).forEach(([key, value]) => formData.append(key, value));
+
+    formAction(formData);
+  };
+
+  const getEmailMessageError = (fieldStateErrorMessage: string | undefined) => {
+    const invalidPasswordError = new EmailAlreadyExistsError().message;
+    if (fieldStateErrorMessage === invalidPasswordError) {
+      return t('emailAlreadyExists');
+    }
+
+    return t('invalidEmail');
+  };
+
+  const getGenericMessageError = (genericErrorMessage: string) => {
+    if (genericErrorMessage === 'Invalid fields. Please check your data.') {
+      return t('InvalidFields');
+    }
+
+    return t('unknownError');
+  };
 
   return (
-    <form action={formAction}>
+    <form onSubmit={form.handleSubmit(onSubmit)}>
       <FieldGroup>
-        <Field>
-          <FieldLabel htmlFor="name">{t('fullName')}</FieldLabel>
-          <Input
-            id="name"
-            name="name"
-            type="text"
-            placeholder="Mateus Domingos"
-            required
-          />
-        </Field>
-        <Field>
-          <FieldLabel htmlFor="email">{t('email')}</FieldLabel>
-          <Input
-            id="email"
-            name="email"
-            type="email"
-            placeholder="m@example.com"
-            required
-          />
-          <FieldDescription>{t('emailDescription')}</FieldDescription>
-        </Field>
-        <Field>
-          <FieldLabel htmlFor="password">{t('password')}</FieldLabel>
-          <Input id="password" name="password" type="password" required />
-          <FieldDescription>{t('passwordDescription')}</FieldDescription>
-        </Field>
-        <Field>
-          <FieldLabel htmlFor="confirm-password">
-            {t('confirmPassword')}
-          </FieldLabel>
-          <Input
-            id="confirm-password"
-            name="confirmPassword"
-            type="password"
-            required
-          />
-          <FieldDescription>{t('confirmPasswordDescription')}</FieldDescription>
-        </Field>
-        {state?.error && <p className="text-red-500 text-sm">{state.error}</p>}
+        <Controller
+          name="name"
+          control={form.control}
+          render={({ field, fieldState }) => (
+            <Field data-invalid={fieldState.invalid}>
+              <FieldLabel htmlFor="name">{t('fullName')}</FieldLabel>
+              <Input {...field} id="name" aria-invalid={fieldState.invalid} />
+              {fieldState.invalid && (
+                <FieldError errors={[{ message: t('nameIsTooShort') }]} />
+              )}
+            </Field>
+          )}
+        />
+        <Controller
+          name="email"
+          control={form.control}
+          render={({ field, fieldState }) => (
+            <Field data-invalid={fieldState.invalid}>
+              <FieldLabel htmlFor="email">{t('email')}</FieldLabel>
+              <Input {...field} id="email" aria-invalid={fieldState.invalid} />
+              {fieldState.invalid && (
+                <FieldError
+                  errors={[
+                    {
+                      message: getEmailMessageError(fieldState.error?.message),
+                    },
+                  ]}
+                />
+              )}
+              <FieldDescription>{t('emailDescription')}</FieldDescription>
+            </Field>
+          )}
+        />
+        <Controller
+          name="password"
+          control={form.control}
+          render={({ field, fieldState }) => (
+            <Field data-invalid={fieldState.invalid}>
+              <FieldLabel htmlFor="password">{t('password')}</FieldLabel>
+              <Input
+                {...field}
+                id="password"
+                aria-invalid={fieldState.invalid}
+                type="password"
+              />
+              {fieldState.invalid && (
+                <FieldError errors={[{ message: t('passwordDescription') }]} />
+              )}
+              {!fieldState.invalid && (
+                <FieldDescription>{t('passwordDescription')}</FieldDescription>
+              )}
+            </Field>
+          )}
+        />
+        <Controller
+          name="confirmPassword"
+          control={form.control}
+          render={({ field, fieldState }) => (
+            <Field data-invalid={fieldState.invalid}>
+              <FieldLabel htmlFor="confirm-password">
+                {t('confirmPassword')}
+              </FieldLabel>
+              <Input
+                {...field}
+                id="confirm-password"
+                aria-invalid={fieldState.invalid}
+                type="password"
+              />
+              {fieldState.invalid && (
+                <FieldError errors={[{ message: t('passwordsDoNotMatch') }]} />
+              )}
+              <FieldDescription>
+                {t('confirmPasswordDescription')}
+              </FieldDescription>
+            </Field>
+          )}
+        />
         <FieldGroup>
           <Field>
+            {state?.error?.generic && (
+              <div
+                role="alert"
+                className="text-destructive text-sm font-normal"
+              >
+                {getGenericMessageError(state.error.generic)}
+              </div>
+            )}
             <Button type="submit">{t('createAccount')}</Button>
             <FieldDescription className="px-6 text-center">
               {t.rich('alreadyHaveAnAccount', {

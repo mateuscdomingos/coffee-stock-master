@@ -11,10 +11,16 @@
         "confirmPasswordDescription": "Please confirm your password.",
         "createAccount": "Create Account",
         "email": "Email",
+        "emailAlreadyExists": "Email already exists",
         "emailDescription": "We'll use this to contact you. We will not share your email with anyone else.",
         "fullName": "Full Name",
+        "invalidEmail": "Invalid email",
+        "InvalidFields": "Invalid fields. Please check your data.",
+        "nameIsTooShort": "Name is too short",
         "password": "Password",
-        "passwordDescription": "Must be at least 8 characters long."
+        "passwordDescription": "Must be at least 8 characters long.",
+        "passwordsDoNotMatch": "Passwords don't match",
+        "unknownError": "Unknown error"
       }
     }
   }

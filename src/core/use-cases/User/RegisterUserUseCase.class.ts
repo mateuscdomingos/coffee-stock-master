@@ -1,4 +1,7 @@
-import { UserAlreadyExistsError } from '@/core/domain/Error/Error.class';
+import {
+  InvalidPasswordError,
+  EmailAlreadyExistsError,
+} from '@/core/domain/Error/Error.class';
 import { User } from '@/core/domain/User/User.class';
 import { UserProps } from '@/core/domain/User/user.types';
 import { Hasher } from '@/core/ports/services/Hasher';
@@ -25,9 +28,12 @@ export class RegisterUserUseCase {
       this.logger.error('RegisterUserUseCase', 'The email already exists', {
         email: data.email,
       });
-      throw new UserAlreadyExistsError();
+      throw new EmailAlreadyExistsError();
     }
 
+    if (data.password.length < 8) {
+      throw new InvalidPasswordError();
+    }
     const passwordHash = await this.hasher.hash(data.password);
 
     const user = new User({

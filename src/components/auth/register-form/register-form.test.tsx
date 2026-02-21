@@ -34,14 +34,108 @@ describe('RegisterForm', () => {
     expect(link).toHaveAttribute('href', '/');
   });
 
-  it('should display error message when state.error is present', () => {
+  describe('when fields are empty', () => {
+    it('should render validation errors', async () => {
+      render(<RegisterForm />);
+
+      const createAccountButton = screen.getByRole('button', {
+        name: 'Create Account',
+      });
+      await userEvent.click(createAccountButton);
+
+      await waitFor(() => {
+        const fullNameInput = screen.getByLabelText('Full Name');
+        expect(fullNameInput).toBeInvalid();
+        expect(screen.getByText('Name is too short')).toBeInTheDocument();
+
+        const emailInput = screen.getByRole('textbox', { name: 'Email' });
+        expect(emailInput).toBeInvalid();
+        expect(screen.getByText('Invalid email')).toBeInTheDocument();
+
+        const passwordInput = screen.getByLabelText('Password');
+        expect(passwordInput).toBeInvalid();
+        expect(
+          screen.getByText('Must be at least 8 characters long.'),
+        ).toBeInTheDocument();
+      });
+
+      await waitFor(() => {
+        expect(handleRegister).not.toHaveBeenCalled();
+      });
+    });
+  });
+
+  describe('when password and confirmPassword are different', () => {
+    it('should render validation error', async () => {
+      render(<RegisterForm />);
+
+      await userEvent.type(screen.getByLabelText('Password'), 'password123');
+      await userEvent.type(
+        screen.getByLabelText('Confirm Password'),
+        'password12',
+      );
+
+      const createAccountButton = screen.getByRole('button', {
+        name: 'Create Account',
+      });
+      await userEvent.click(createAccountButton);
+
+      await waitFor(() => {
+        const confirmPasswordInput = screen.getByLabelText('Confirm Password');
+        expect(confirmPasswordInput).toBeInvalid();
+        expect(screen.getByText("Passwords don't match")).toBeInTheDocument();
+      });
+
+      await waitFor(() => {
+        expect(handleRegister).not.toHaveBeenCalled();
+      });
+    });
+  });
+
+  it('should display "Email Already Exists" error coming from the server action', () => {
     jest
       .spyOn(React, 'useActionState')
-      .mockReturnValue([{ error: 'Invalid credentials' }, jest.fn(), false]);
+      .mockReturnValue([
+        { error: { email: 'Email already exists.' } },
+        jest.fn(),
+        false,
+      ]);
 
     render(<RegisterForm />);
 
-    expect(screen.getByText('Invalid credentials')).toBeInTheDocument();
+    const emailInput = screen.getByRole('textbox', { name: 'Email' });
+    expect(emailInput).toBeInvalid();
+    expect(screen.getByText('Email already exists')).toBeInTheDocument();
+  });
+
+  it('should display "Invalid fields" error coming from the server action', () => {
+    jest
+      .spyOn(React, 'useActionState')
+      .mockReturnValue([
+        { error: { generic: 'Invalid fields. Please check your data.' } },
+        jest.fn(),
+        false,
+      ]);
+
+    render(<RegisterForm />);
+
+    expect(
+      screen.getByText('Invalid fields. Please check your data.'),
+    ).toBeInTheDocument();
+  });
+
+  it('should display "Unknown error" error coming from the server action', () => {
+    jest
+      .spyOn(React, 'useActionState')
+      .mockReturnValue([
+        { error: { generic: 'Unknown error' } },
+        jest.fn(),
+        false,
+      ]);
+
+    render(<RegisterForm />);
+
+    expect(screen.getByText('Unknown error')).toBeInTheDocument();
   });
 
   describe('behavior', () => {

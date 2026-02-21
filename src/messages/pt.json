@@ -12,10 +12,16 @@
         "confirmPasswordDescription": "Por favor, confirme sua senha.",
         "createAccount": "Criar Conta",
         "email": "E-mail",
+        "emailAlreadyExists": "Email já existe",
         "emailDescription": "Usaremos isso para entrar em contato. Não compartilharemos seu e-mail com ninguém.",
         "fullName": "Nome Completo",
+        "invalidEmail": "Email inválido",
+        "InvalidFields": "Campos inválidos. Por favor cheque seus dados",
+        "nameIsTooShort": "Nome muito curto",
         "password": "Senha",
-        "passwordDescription": "Deve ter pelo menos 8 caracteres."
+        "passwordDescription": "Deve ter pelo menos 8 caracteres.",
+        "passwordsDoNotMatch": "As senhas não coincidem",
+        "unknownError": "Erro desconhecido"
       }
     }
   }
