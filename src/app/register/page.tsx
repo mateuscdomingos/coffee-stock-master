@@ -1,5 +1,6 @@
 import { BaseCard } from '@/components/auth/base-card';
 import { RegisterForm } from '@/components/auth/register-form';
+import { H1 } from '@/components/ui/h1';
 import { getTranslations } from 'next-intl/server';
 
 export default async function RegisterPage() {
@@ -7,9 +8,7 @@ export default async function RegisterPage() {
 
   return (
     <div className="flex flex-col w-full items-center justify-center">
-      <h1 className="text-3xl font-semibold leading-tight md:text-5xl">
-        {t('title')}
-      </h1>
+      <H1>{t('title')}</H1>
       <div className="w-full max-w-sm">
         <BaseCard description={t('description')}>
           <RegisterForm />
