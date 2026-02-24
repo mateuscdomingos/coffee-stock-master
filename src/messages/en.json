@@ -1,10 +1,24 @@
 {
+  "loginPage": {
+    "description": "Enter your email below to login to your account.",
+    "title": "Login"
+  },
   "registerPage": {
     "description": "Enter your information below to create your account.",
     "title": "Create an account"
   },
   "components": {
     "auth": {
+      "loginForm": {
+        "doNotHaveAnAccount": "Don't have an account? <SignUpLink>Sign up</SignUpLink>",
+        "email": "Email",
+        "invalidCredentials": "Invalid credentials",
+        "invalidEmail": "Invalid email",
+        "login": "Login",
+        "password": "Password",
+        "unknownError": "Unknown error",
+        "weakPassword": "Must be at least 8 characters long"
+      },
       "registerForm": {
         "alreadyHaveAnAccount": "Already have an account? <SignInLink>Sign in</SignInLink>",
         "confirmPassword": "Confirm Password",
@@ -18,7 +32,7 @@
         "InvalidFields": "Invalid fields. Please check your data.",
         "nameIsTooShort": "Name is too short",
         "password": "Password",
-        "passwordDescription": "Must be at least 8 characters long.",
+        "passwordDescription": "Must be at least 8 characters long",
         "passwordsDoNotMatch": "Passwords don't match",
         "unknownError": "Unknown error"
       }

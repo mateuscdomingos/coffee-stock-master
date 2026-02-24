@@ -1,0 +1,39 @@
+import NextAuth from 'next-auth';
+import authConfig from './auth.config';
+import Credentials from 'next-auth/providers/credentials';
+import { AuthUserUseCaseFactory } from './infra/factories/AuthUserUseCaseFactory';
+import { loginSchema } from './lib/schemas/auth';
+
+const { handlers, auth, signIn, signOut } = NextAuth({
+  ...authConfig,
+  session: { strategy: 'jwt' },
+  providers: [
+    Credentials({
+      async authorize(credentials) {
+        const validated = loginSchema.safeParse(credentials);
+        if (!validated.success) return null;
+
+        const { email, password } = validated.data;
+
+        const loginUseCase = AuthUserUseCaseFactory.makeAuthUserUseCase();
+        const logger = AuthUserUseCaseFactory.makeLogger();
+
+        try {
+          const user = await loginUseCase.execute({ email, password });
+
+          if (user) {
+            logger.info('auth', 'User authenticated:', user.email);
+            return { id: user.id, name: user.name, email: user.email };
+          }
+        } catch (error) {
+          logger.error('auth', 'Auth error:', error);
+          return null;
+        }
+
+        return null;
+      },
+    }),
+  ],
+});
+
+export { handlers, auth, signIn, signOut };

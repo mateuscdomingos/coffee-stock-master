@@ -1,11 +1,25 @@
 {
   "cSpell:disable": true,
+  "loginPage": {
+    "description": "Insira seu e-mail abaixo para acessar sua conta.",
+    "title": "Conecte-se"
+  },
   "registerPage": {
     "description": "Insira suas informações abaixo para criar sua conta.",
     "title": "Criar uma conta"
   },
   "components": {
     "auth": {
+      "loginForm": {
+        "doNotHaveAnAccount": "Não tem uma conta? <SignUpLink>Cadastre-se</SignUpLink>",
+        "email": "Email",
+        "invalidCredentials": "Credenciais invalidas",
+        "invalidEmail": "Email inválido",
+        "login": "Login",
+        "password": "Senha",
+        "unknownError": "Erro desconhecido",
+        "weakPassword": "Deve ter pelo menos 8 caracteres"
+      },
       "registerForm": {
         "alreadyHaveAnAccount": "Já tem uma conta? <SignInLink>Faça login</SignInLink>",
         "confirmPassword": "Confirmar Senha",
@@ -19,7 +33,7 @@
         "InvalidFields": "Campos inválidos. Por favor cheque seus dados",
         "nameIsTooShort": "Nome muito curto",
         "password": "Senha",
-        "passwordDescription": "Deve ter pelo menos 8 caracteres.",
+        "passwordDescription": "Deve ter pelo menos 8 caracteres",
         "passwordsDoNotMatch": "As senhas não coincidem",
         "unknownError": "Erro desconhecido"
       }

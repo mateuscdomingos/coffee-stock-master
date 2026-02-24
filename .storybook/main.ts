@@ -43,6 +43,8 @@ const config: StorybookConfig = {
       exclude: ['pg', '@prisma/client', '@prisma/adapter-pg'],
     };
 
+    config.define = { 'process.env': {}, __dirname: JSON.stringify('') };
+
     return config;
   },
 };
