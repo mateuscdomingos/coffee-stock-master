@@ -31,7 +31,7 @@ describe('RegisterForm', () => {
     expect(screen.getByText('Already have an account?')).toBeInTheDocument();
     const link = screen.getByRole('link', { name: 'Sign in' });
     expect(link).toBeInTheDocument();
-    expect(link).toHaveAttribute('href', '/');
+    expect(link).toHaveAttribute('href', '/login');
   });
 
   describe('when fields are empty', () => {
@@ -55,7 +55,7 @@ describe('RegisterForm', () => {
         const passwordInput = screen.getByLabelText('Password');
         expect(passwordInput).toBeInvalid();
         expect(
-          screen.getByText('Must be at least 8 characters long.'),
+          screen.getByText('Must be at least 8 characters long'),
         ).toBeInTheDocument();
       });
 
@@ -136,6 +136,19 @@ describe('RegisterForm', () => {
     render(<RegisterForm />);
 
     expect(screen.getByText('Unknown error')).toBeInTheDocument();
+  });
+
+  it('should disable the button while the action is pending', () => {
+    jest
+      .spyOn(React, 'useActionState')
+      .mockReturnValue([undefined, jest.fn(), true]);
+
+    render(<RegisterForm />);
+
+    const createAccountButton = screen.getByRole('button', {
+      name: 'Loading Create Account',
+    });
+    expect(createAccountButton).toBeDisabled();
   });
 
   describe('behavior', () => {

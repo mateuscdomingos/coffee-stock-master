@@ -20,7 +20,10 @@ import { EmailAlreadyExistsError } from '@/core/domain/Error/Error.class';
 
 export function RegisterForm() {
   const t = useTranslations('components.auth.registerForm');
-  const [state, formAction] = useActionState(handleRegister, undefined);
+  const [state, formAction, isPending] = useActionState(
+    handleRegister,
+    undefined,
+  );
   const form = useForm<RegisterInput>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
@@ -156,10 +159,12 @@ export function RegisterForm() {
                 {getGenericMessageError(state.error.generic)}
               </div>
             )}
-            <Button type="submit">{t('createAccount')}</Button>
+            <Button type="submit" loading={isPending}>
+              {t('createAccount')}
+            </Button>
             <FieldDescription className="px-6 text-center">
               {t.rich('alreadyHaveAnAccount', {
-                SignInLink: (chunks) => <Link href="/">{chunks}</Link>,
+                SignInLink: (chunks) => <Link href="/login">{chunks}</Link>,
               })}
             </FieldDescription>
           </Field>

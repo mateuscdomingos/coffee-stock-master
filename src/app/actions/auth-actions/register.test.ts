@@ -2,8 +2,8 @@ import { RegisterUserUseCase } from '@/core/use-cases/User/RegisterUserUseCase.c
 import { EmailAlreadyExistsError } from '@/core/domain/Error/Error.class';
 import { RegisterUserUseCaseFactory } from '@/infra/factories/RegisterUserUseCaseFactory';
 
-import { handleRegister } from './auth-actions';
-import { createFormData } from './test/utils/form-data-utils';
+import { handleRegister } from './register';
+import { createFormData } from '../test/utils/form-data-utils';
 
 jest.mock('@/infra/factories/RegisterUserUseCaseFactory', () => ({
   RegisterUserUseCaseFactory: {

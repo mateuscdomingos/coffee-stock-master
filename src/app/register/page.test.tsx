@@ -10,7 +10,9 @@ describe('RegisterPage', () => {
     const ResolvedPage = await RegisterPage();
     render(ResolvedPage);
 
-    expect(screen.getByText('Create an account')).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { name: 'Create an account' }),
+    ).toBeInTheDocument();
     expect(
       screen.getByText('Enter your information below to create your account.'),
     ).toBeInTheDocument();

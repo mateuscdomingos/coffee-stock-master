@@ -20,6 +20,7 @@ export function Header() {
     <header className="flex gap-4 p-4 border-b bg-gray-200">
       <Link href="/">Home</Link>
       <Link href="/register">Register</Link>
+      <Link href="/stores">Stores</Link>
       <button
         onClick={toggleLanguage}
         className="px-3 py-1 bg-secondary rounded-md text-sm font-medium"
