@@ -1,6 +1,6 @@
 generator client {
-  provider        = "prisma-client"
-  output     = "./generated"
+  provider = "prisma-client"
+  output   = "./generated"
 }
 
 datasource db {
@@ -13,6 +13,9 @@ model Store {
   monthlyBudgetInCents Int
   orders               Order[]
   createdAt            DateTime @default(now())
+  userId               String
+
+  user User @relation(fields: [userId], references: [id])
 }
 
 model Order {
@@ -22,10 +25,10 @@ model Order {
   status             String
   totalAmountInCents Int
   createdAt          DateTime @default(now())
-  
-  items              OrderItem[]
-  store              Store       @relation(fields: [storeId], references: [id])
-  user               User        @relation(fields: [employeeId], references: [id])
+
+  items OrderItem[]
+  store Store       @relation(fields: [storeId], references: [id])
+  user  User        @relation(fields: [employeeId], references: [id])
 
   @@index([storeId, createdAt])
 }
@@ -37,8 +40,8 @@ model OrderItem {
   name             String
   quantity         Int
   unitPriceInCents Int
-  
-  order            Order  @relation(fields: [orderId], references: [id])
+
+  order Order @relation(fields: [orderId], references: [id])
 }
 
 model User {
@@ -49,4 +52,5 @@ model User {
   createdAt DateTime @default(now())
 
   orders Order[]
+  stores Store[]
 }

@@ -9,6 +9,7 @@ describe('Domain: Store', () => {
           id: 'store-123',
           name: 'Main Street Coffee',
           monthlyBudgetInCents: 500000,
+          userId: 'user-123',
         });
 
         expect(store.props.id).toBe('store-123');
@@ -23,6 +24,7 @@ describe('Domain: Store', () => {
           id: 'store-123',
           name: 'Main Street Coffee',
           monthlyBudgetInCents: 500000,
+          userId: 'user-123',
         });
 
         const updatedStore = store.updateMonthlyBudgetInCents(750000);
@@ -40,6 +42,7 @@ describe('Domain: Store', () => {
           id: 'store-123',
           name: 'Main Street Coffee',
           monthlyBudgetInCents: 500000,
+          userId: 'user-123',
         };
 
         const store = storeFP.createStore(storeProps);
@@ -56,6 +59,7 @@ describe('Domain: Store', () => {
           id: 'store-123',
           name: 'Main Street Coffee',
           monthlyBudgetInCents: 500000,
+          userId: 'user-123',
         });
 
         const updatedStore = storeFP.updateMonthlyBudgetInCents(store, 750000);

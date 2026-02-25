@@ -745,7 +745,8 @@ export const StoreScalarFieldEnum = {
   id: 'id',
   name: 'name',
   monthlyBudgetInCents: 'monthlyBudgetInCents',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  userId: 'userId'
 } as const
 
 export type StoreScalarFieldEnum = (typeof StoreScalarFieldEnum)[keyof typeof StoreScalarFieldEnum]
