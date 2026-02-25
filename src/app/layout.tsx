@@ -5,6 +5,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { Header } from '@/components/layout/header';
 import { getLocale } from '@/i18n/locale';
+import { Toaster } from '@/components/ui/sonner';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -38,6 +39,7 @@ export default async function RootLayout({
           <Header />
           <main className="max-w-7xl mx-auto px-4 p-6">{children}</main>
         </NextIntlClientProvider>
+        <Toaster position="top-center" />
       </body>
     </html>
   );

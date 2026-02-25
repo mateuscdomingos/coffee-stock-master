@@ -5,6 +5,12 @@ jest.mock('@/app/actions/auth-actions', () => ({
   handleRegister: jest.fn(),
 }));
 
+jest.mock('next/navigation', () => ({
+  useRouter: () => ({
+    push: jest.fn(),
+  }),
+}));
+
 describe('RegisterPage', () => {
   it('should render the title and the register form', async () => {
     const ResolvedPage = await RegisterPage();

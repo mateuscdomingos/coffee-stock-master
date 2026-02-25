@@ -31,10 +31,10 @@ describe('handleRegister Server Action', () => {
       } as unknown as jest.Mocked<RegisterUserUseCase>);
   });
 
-  it('should return undefined error on success', async () => {
+  it('should return success on success', async () => {
     const result = await handleRegister(undefined, formData);
 
-    expect(result).toEqual({ error: undefined });
+    expect(result).toEqual({ success: true });
     expect(mockExecute).toHaveBeenCalledWith({
       name: 'Mateus Domingos',
       email: 'mateus@example.com',

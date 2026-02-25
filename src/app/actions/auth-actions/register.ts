@@ -41,5 +41,5 @@ export async function handleRegister(_: unknown, formData: FormData) {
     return { error: { generic: 'Unknown error' } };
   }
 
-  return { error: undefined };
+  return { success: true };
 }

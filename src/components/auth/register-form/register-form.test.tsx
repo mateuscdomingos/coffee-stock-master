@@ -3,11 +3,25 @@ import React from 'react';
 import { render, screen, waitFor } from '@/test/test-utils';
 import userEvent from '@testing-library/user-event';
 
+const mockPush = jest.fn();
+jest.mock('next/navigation', () => ({
+  useRouter: () => ({
+    push: mockPush,
+  }),
+}));
+
+jest.mock('sonner', () => ({
+  toast: {
+    success: jest.fn(),
+  },
+}));
+
 jest.mock('@/app/actions/auth-actions', () => ({
   handleRegister: jest.fn(),
 }));
 
 import { handleRegister } from '@/app/actions/auth-actions';
+import { toast } from 'sonner';
 
 describe('RegisterForm', () => {
   it('should render all input fields with translated labels', () => {
@@ -89,6 +103,19 @@ describe('RegisterForm', () => {
       await waitFor(() => {
         expect(handleRegister).not.toHaveBeenCalled();
       });
+    });
+  });
+
+  describe('when registration is successful', () => {
+    it('should display a success toast and redirect to login', () => {
+      jest
+        .spyOn(React, 'useActionState')
+        .mockReturnValue([{ success: true }, jest.fn(), false]);
+
+      render(<RegisterForm />);
+
+      expect(toast.success).toHaveBeenCalledWith('User created.');
+      expect(mockPush).toHaveBeenCalledWith('/login');
     });
   });
 

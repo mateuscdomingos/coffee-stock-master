@@ -17,8 +17,11 @@ import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { RegisterInput, registerSchema } from '@/lib/schemas/auth';
 import { EmailAlreadyExistsError } from '@/core/domain/Error/Error.class';
+import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 export function RegisterForm() {
+  const router = useRouter();
   const t = useTranslations('components.auth.registerForm');
   const [state, formAction, isPending] = useActionState(
     handleRegister,
@@ -44,6 +47,13 @@ export function RegisterForm() {
       });
     }
   }, [state, form]);
+
+  useEffect(() => {
+    if (state?.success) {
+      toast.success('User created.');
+      router.push('/login');
+    }
+  }, [state, form, router]);
 
   const onSubmit = (data: RegisterInput) => {
     const formData = new FormData();
