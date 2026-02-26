@@ -4,6 +4,10 @@
     "description": "Insira seu e-mail abaixo para acessar sua conta.",
     "title": "Conecte-se"
   },
+  "newStorePage": {
+    "description": "Insira as informações da Loja abaixo para criar uma nova Loja.",
+    "title": "Criar nova Loja"
+  },
   "registerPage": {
     "description": "Insira suas informações abaixo para criar sua conta.",
     "title": "Criar uma conta"
@@ -35,6 +39,21 @@
         "password": "Senha",
         "passwordDescription": "Deve ter pelo menos 8 caracteres",
         "passwordsDoNotMatch": "As senhas não coincidem",
+        "unknownError": "Erro desconhecido"
+      }
+    },
+    "stores": {
+      "addStoreButton": {
+        "addNewStore": "Adicionar nova Loja"
+      },
+      "addStoreForm": {
+        "invalidBudget": "O orçamento precisa ser maior que 0",
+        "invalidFields": "Campos inválidos",
+        "monthlyBudget": "Orçamento Mensal",
+        "monthlyBudgetDescription": "Defina o limite máximo de gastos mensais para esta loja. Esse valor ajudará a monitorar sua saúde financeira e evitar custos inesperados.",
+        "name": "Nome",
+        "nameIsTooShort": "O nome é muito curto",
+        "submit": "Salvar",
         "unknownError": "Erro desconhecido"
       }
     }
