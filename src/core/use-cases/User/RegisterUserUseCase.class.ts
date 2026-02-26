@@ -41,12 +41,12 @@ export class RegisterUserUseCase {
       name: data.name,
       email: data.email,
       passwordHash,
-      createdAt: data.createdAt ?? new Date(),
     });
 
     await this.userRepository.save(user);
     this.logger.info('RegisterUserUseCase', 'User successfully registered', {
-      email: data.email,
+      id: user.props.id,
+      email: user.props.email,
     });
   }
 }

@@ -1,8 +1,9 @@
 export interface StoreProps {
-  readonly id: string;
-  readonly name: string;
-  readonly monthlyBudgetInCents: number;
-  readonly userId: string;
+  id: string;
+  name: string;
+  monthlyBudgetInCents: number;
+  userId: string;
+  createdAt?: Date;
 }
 
 export type Store = StoreProps;
