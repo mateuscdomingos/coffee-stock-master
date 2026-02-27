@@ -7,12 +7,12 @@ import {
   StoreRepository,
   StoreRepositoryFN,
 } from '@/core/ports/repositories/StoreRepository';
-import { DateProvider } from '../../providers/DateProvider';
 import { Order } from '@/core/domain/Order/Order.class';
 import { createOrderUseCase } from './createOrderUseCase.fn';
 import * as orderFP from '@/core/domain/Order/order.fn';
 import { Logger } from '@/core/ports/services/Logger';
 import { StoreNotFoundError } from '@/core/domain/Error/Error.class';
+import { DateProvider } from '@/core/ports/services/DateProvider';
 
 describe('CreateOrderUseCase', () => {
   describe('Paradigm: Object-Oriented (OOP)', () => {
@@ -34,6 +34,7 @@ describe('CreateOrderUseCase', () => {
             props: { monthlyBudgetInCents: 10000 },
           }),
           save: jest.fn(),
+          findAllByUserId: jest.fn(),
         };
         dateProvider = {
           getRangeOfMonth: jest
@@ -83,6 +84,7 @@ describe('CreateOrderUseCase', () => {
           const storeRepo: StoreRepository = {
             findById: jest.fn().mockResolvedValue(null),
             save: jest.fn(),
+            findAllByUserId: jest.fn(),
           };
 
           const useCase = new CreateOrderUseCase(
@@ -127,6 +129,7 @@ describe('CreateOrderUseCase', () => {
           monthlyBudgetInCents: 10000,
         }),
         save: jest.fn(),
+        findAllByUserId: jest.fn(),
       };
       dateProvider = {
         getRangeOfMonth: jest
@@ -178,6 +181,7 @@ describe('CreateOrderUseCase', () => {
         const storeRepo: StoreRepositoryFN = {
           findById: jest.fn().mockResolvedValue(undefined),
           save: jest.fn(),
+          findAllByUserId: jest.fn(),
         };
 
         const useCase = createOrderUseCase(

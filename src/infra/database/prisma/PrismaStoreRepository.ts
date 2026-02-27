@@ -36,4 +36,21 @@ export class PrismaStoreRepository implements StoreRepository {
       createdAt: data.createdAt,
     });
   }
+
+  async findAllByUserId(userId: string): Promise<Store[]> {
+    const storesData = await this.prisma.store.findMany({
+      where: { userId },
+      orderBy: { createdAt: 'asc' },
+    });
+
+    return storesData.map((data) => {
+      return new Store({
+        id: data.id,
+        monthlyBudgetInCents: data.monthlyBudgetInCents,
+        name: data.name,
+        userId: data.userId,
+        createdAt: data.createdAt,
+      });
+    });
+  }
 }

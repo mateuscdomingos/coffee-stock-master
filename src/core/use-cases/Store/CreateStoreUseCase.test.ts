@@ -23,6 +23,7 @@ describe('CreateStoreUseCase', () => {
       storeRepository = {
         save: jest.fn().mockResolvedValue(undefined),
         findById: jest.fn(),
+        findAllByUserId: jest.fn(),
       };
       jest.clearAllMocks();
     });
@@ -54,6 +55,7 @@ describe('CreateStoreUseCase', () => {
       storeRepository = {
         save: jest.fn().mockResolvedValue(undefined),
         findById: jest.fn(),
+        findAllByUserId: jest.fn(),
       };
       jest.clearAllMocks();
     });

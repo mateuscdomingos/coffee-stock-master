@@ -11,7 +11,7 @@ export class CreateStoreUseCase {
     private readonly logger: Logger,
   ) {}
 
-  execute = async (data: CreateStoreProps) => {
+  async execute(data: CreateStoreProps) {
     this.logger.info(CreateStoreUseCase.name, 'Initial store creation', {
       name: data.name,
     });
@@ -28,5 +28,5 @@ export class CreateStoreUseCase {
       id: store.props.id,
       name: store.props.name,
     });
-  };
+  }
 }

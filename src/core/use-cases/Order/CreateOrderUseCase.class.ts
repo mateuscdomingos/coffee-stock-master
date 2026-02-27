@@ -13,7 +13,7 @@ export class CreateOrderUseCase {
     private readonly logger: Logger,
   ) {}
 
-  execute = async (order: Order) => {
+  async execute(order: Order) {
     this.logger.info(CreateOrderUseCase.name, 'Initial order creation', {
       storeId: order.props.storeId,
     });
@@ -50,5 +50,5 @@ export class CreateOrderUseCase {
     this.logger.info(CreateOrderUseCase.name, 'Order saved successfully', {
       orderId: order.props.id,
     });
-  };
+  }
 }
