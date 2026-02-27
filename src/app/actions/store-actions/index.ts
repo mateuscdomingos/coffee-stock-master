@@ -1,1 +1,1 @@
-export { handleCreateStore } from './create-store';
+export { handleCreateStore } from './create';

@@ -1,6 +1,6 @@
 import { auth } from '@/auth';
 import { CreateStoreUseCaseFactory } from '@/infra/factories/CreateStoreUseCaseFactory';
-import { handleCreateStore } from './create-store';
+import { handleCreateStore } from './create';
 import { createFormData } from '../test/utils/form-data-utils';
 import { CreateStoreUseCase } from '@/core/use-cases/Store/CreateStoreUseCase.class';
 
