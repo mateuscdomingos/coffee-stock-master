@@ -14,7 +14,7 @@ export class CreateOrderUseCase {
   ) {}
 
   execute = async (order: Order) => {
-    this.logger.info('CreateOrderUseCase', 'Initial order creation', {
+    this.logger.info(CreateOrderUseCase.name, 'Initial order creation', {
       storeId: order.props.storeId,
     });
     const { start, end } = this.dateProvider.getRangeOfMonth(
@@ -27,7 +27,7 @@ export class CreateOrderUseCase {
     ]);
 
     if (!store) {
-      this.logger.error('CreateOrderUseCase', 'Store not found', {
+      this.logger.error(CreateOrderUseCase.name, 'Store not found', {
         storeId: order.props.storeId,
       });
       throw new StoreNotFoundError(order.props.storeId);
@@ -38,12 +38,16 @@ export class CreateOrderUseCase {
     try {
       order.validate(spending, store.props.monthlyBudgetInCents);
     } catch (error) {
-      this.logger.error('CreateOrderUseCase', 'Order validation failed', error);
+      this.logger.error(
+        CreateOrderUseCase.name,
+        'Order validation failed',
+        error,
+      );
       throw error;
     }
 
     await this.orderRepo.save(order);
-    this.logger.info('CreateOrderUseCase', 'Order saved successfully', {
+    this.logger.info(CreateOrderUseCase.name, 'Order saved successfully', {
       orderId: order.props.id,
     });
   };

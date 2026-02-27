@@ -16,15 +16,19 @@ export class AuthenticateUserUseCase {
   ) {}
 
   async execute({ email, password }: AuthenticateUserDTO) {
-    this.logger.info('AuthenticateUserUseCase', 'Login attempt', {
+    this.logger.info(AuthenticateUserUseCase.name, 'Login attempt', {
       email,
     });
     const user = await this.userRepository.findByEmail(email);
 
     if (!user) {
-      this.logger.error('AuthenticateUserUseCase', 'User not found at login', {
-        email,
-      });
+      this.logger.error(
+        AuthenticateUserUseCase.name,
+        'User not found at login',
+        {
+          email,
+        },
+      );
       throw new InvalidCredentialsError();
     }
 
@@ -34,14 +38,14 @@ export class AuthenticateUserUseCase {
     );
 
     if (!isPasswordValid) {
-      this.logger.error('AuthenticateUserUseCase', 'Incorrect password', {
+      this.logger.error(AuthenticateUserUseCase.name, 'Incorrect password', {
         email,
       });
       throw new InvalidCredentialsError();
     }
 
     this.logger.info(
-      'AuthenticateUserUseCase',
+      AuthenticateUserUseCase.name,
       'User successfully authenticated',
       { userId: user.props.id },
     );

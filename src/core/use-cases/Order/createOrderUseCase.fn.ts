@@ -14,7 +14,7 @@ export const createOrderUseCase =
     logger: Logger,
   ) =>
   async (order: Order) => {
-    logger.info('CreateOrderUseCase', 'Initial order creation', {
+    logger.info(createOrderUseCase.name, 'Initial order creation', {
       storeId: order.storeId,
     });
     const { start, end } = dateProvider.getRangeOfMonth(dateProvider.now());
@@ -25,7 +25,7 @@ export const createOrderUseCase =
     ]);
 
     if (!store) {
-      logger.error('CreateOrderUseCase', 'Store not found', {
+      logger.error(createOrderUseCase.name, 'Store not found', {
         storeId: order.storeId,
       });
       throw new StoreNotFoundError(order.storeId);
@@ -36,12 +36,12 @@ export const createOrderUseCase =
     try {
       validateOrder(order, spending, store.monthlyBudgetInCents);
     } catch (error) {
-      logger.error('CreateOrderUseCase', 'Order validation failed', error);
+      logger.error(createOrderUseCase.name, 'Order validation failed', error);
       throw error;
     }
 
     await orderRepo.save(order);
-    logger.info('CreateOrderUseCase', 'Order saved successfully', {
+    logger.info(createOrderUseCase.name, 'Order saved successfully', {
       orderId: order.id,
     });
   };

@@ -33,7 +33,7 @@ export async function handleRegister(_: unknown, formData: FormData) {
       password,
     });
   } catch (error) {
-    logger.error('auth-actions', 'Error in handleRegister:', error);
+    logger.error(handleRegister.name, 'Error in handleRegister:', error);
     if (error instanceof EmailAlreadyExistsError) {
       return { error: { email: error.message } };
     }

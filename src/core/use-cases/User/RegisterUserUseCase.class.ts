@@ -20,12 +20,16 @@ export class RegisterUserUseCase {
   ) {}
 
   async execute(data: RegisterUserProps): Promise<void> {
-    this.logger.info('RegisterUserUseCase', 'Starting new user registration', {
-      email: data.email,
-    });
+    this.logger.info(
+      RegisterUserUseCase.name,
+      'Starting new user registration',
+      {
+        email: data.email,
+      },
+    );
     const userExists = await this.userRepository.findByEmail(data.email);
     if (userExists) {
-      this.logger.error('RegisterUserUseCase', 'The email already exists', {
+      this.logger.error(RegisterUserUseCase.name, 'The email already exists', {
         email: data.email,
       });
       throw new EmailAlreadyExistsError();
@@ -44,7 +48,7 @@ export class RegisterUserUseCase {
     });
 
     await this.userRepository.save(user);
-    this.logger.info('RegisterUserUseCase', 'User successfully registered', {
+    this.logger.info(RegisterUserUseCase.name, 'User successfully registered', {
       id: user.props.id,
       email: user.props.email,
     });

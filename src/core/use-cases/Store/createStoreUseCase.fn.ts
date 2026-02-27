@@ -6,7 +6,7 @@ import { Store } from '@/core/domain/Store/Store.class';
 export const createStoreUseCase =
   (storeRepository: StoreRepository, logger: Logger) =>
   async (data: CreateStoreProps): Promise<void> => {
-    logger.info('createStoreUseCase', 'Initial store creation', {
+    logger.info(createStoreUseCase.name, 'Initial store creation', {
       name: data.name,
     });
 
@@ -19,7 +19,7 @@ export const createStoreUseCase =
 
     await storeRepository.save(store);
 
-    logger.info('createStoreUseCase', 'Store successfully registered', {
+    logger.info(createStoreUseCase.name, 'Store successfully registered', {
       id: store.props.id,
       name: store.props.name,
     });

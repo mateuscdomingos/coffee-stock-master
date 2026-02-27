@@ -11,13 +11,13 @@ export type AuthenticateUserDTO = {
 export const authenticateUserUseCase =
   (userRepository: UserRepositoryFN, hasher: Hasher, logger: Logger) =>
   async ({ email, password }: AuthenticateUserDTO) => {
-    logger.info('AuthenticateUserUseCase', 'Login attempt', {
+    logger.info(authenticateUserUseCase.name, 'Login attempt', {
       email,
     });
     const user = await userRepository.findByEmail(email);
 
     if (!user) {
-      logger.error('AuthenticateUserUseCase', 'User not found at login', {
+      logger.error(authenticateUserUseCase.name, 'User not found at login', {
         email,
       });
       throw new InvalidCredentialsError();
@@ -26,15 +26,19 @@ export const authenticateUserUseCase =
     const isPasswordValid = await hasher.compare(password, user.passwordHash);
 
     if (!isPasswordValid) {
-      logger.error('AuthenticateUserUseCase', 'Incorrect password', {
+      logger.error(authenticateUserUseCase.name, 'Incorrect password', {
         email,
       });
       throw new InvalidCredentialsError();
     }
 
-    logger.info('AuthenticateUserUseCase', 'User successfully authenticated', {
-      userId: user.id,
-    });
+    logger.info(
+      authenticateUserUseCase.name,
+      'User successfully authenticated',
+      {
+        userId: user.id,
+      },
+    );
 
     return {
       id: user.id,

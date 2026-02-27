@@ -15,12 +15,12 @@ export type RegisterUserProps = Omit<UserProps, 'passwordHash' | 'id'> & {
 export const registerUserUseCase =
   (userRepository: UserRepositoryFN, hasher: Hasher, logger: Logger) =>
   async (data: RegisterUserProps): Promise<void> => {
-    logger.info('RegisterUserUseCase', 'Starting new user registration', {
+    logger.info(registerUserUseCase.name, 'Starting new user registration', {
       email: data.email,
     });
     const userExists = await userRepository.findByEmail(data.email);
     if (userExists) {
-      logger.info('RegisterUserUseCase', 'The email already exists', {
+      logger.info(registerUserUseCase.name, 'The email already exists', {
         email: data.email,
       });
       throw new EmailAlreadyExistsError();
@@ -40,7 +40,7 @@ export const registerUserUseCase =
     });
 
     await userRepository.save(user);
-    logger.info('RegisterUserUseCase', 'User successfully registered', {
+    logger.info(registerUserUseCase.name, 'User successfully registered', {
       email: data.email,
     });
   };

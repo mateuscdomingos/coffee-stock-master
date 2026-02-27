@@ -36,11 +36,11 @@ const { handlers, auth, signIn, signOut } = NextAuth({
           const user = await loginUseCase.execute({ email, password });
 
           if (user) {
-            logger.info('auth', 'User authenticated:', user.email);
+            logger.info(NextAuth.name, 'User authenticated:', user.email);
             return { id: user.id, name: user.name, email: user.email };
           }
         } catch (error) {
-          logger.error('auth', 'Auth error:', error);
+          logger.error(NextAuth.name, 'Auth error:', error);
           return null;
         }
 
