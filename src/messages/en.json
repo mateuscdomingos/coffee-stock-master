@@ -58,6 +58,10 @@
         "nameIsTooShort": "Name is too short",
         "submit": "Submit",
         "unknownError": "Unknown error"
+      },
+      "storeCard": {
+        "monthlyBudget": "MONTHLY BUDGET",
+        "overview": "Overview"
       }
     }
   }

@@ -12,6 +12,10 @@
     "description": "Insira suas informações abaixo para criar sua conta.",
     "title": "Criar uma conta"
   },
+  "storesPage": {
+    "addNewStore": "Adicionar nova Loja",
+    "title": "Lojas"
+  },
   "components": {
     "auth": {
       "loginForm": {
@@ -55,6 +59,10 @@
         "nameIsTooShort": "O nome é muito curto",
         "submit": "Salvar",
         "unknownError": "Erro desconhecido"
+      },
+      "storeCard": {
+        "monthlyBudget": "ORÇAMENTO MENSAL",
+        "overview": "Visão geral"
       }
     }
   }
