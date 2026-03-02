@@ -45,6 +45,14 @@
         "unknownError": "Unknown error"
       }
     },
+    "navigation": {
+      "createAccount": "Create Account",
+      "exit": "Exit",
+      "login": "Login",
+      "myStores": "My Stores",
+      "preferences": "Preferences",
+      "switchLanguage": "Switch Language"
+    },
     "stores": {
       "addStoreButton": {
         "addNewStore": "Add new Store"

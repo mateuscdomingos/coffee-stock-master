@@ -46,6 +46,14 @@
         "unknownError": "Erro desconhecido"
       }
     },
+    "navigation": {
+      "createAccount": "Criar Conta",
+      "exit": "Sair",
+      "login": "Entrar",
+      "myStores": "Minhas Lojas",
+      "preferences": "Preferências",
+      "switchLanguage": "Alterar Idioma"
+    },
     "stores": {
       "addStoreButton": {
         "addNewStore": "Adicionar nova Loja"
