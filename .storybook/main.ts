@@ -22,15 +22,19 @@ const config: StorybookConfig = {
   viteFinal: async (config) => {
     config.resolve = config.resolve || {};
 
-    const mockPath = path.resolve(__dirname, 'mocks/empty-module.ts');
+    const emptyMockPath = path.resolve(__dirname, 'mocks/empty-module.ts');
     const serverMockPath = path.resolve(__dirname, 'mocks/next-intl-server.ts');
+    const authMockPath = path.resolve(__dirname, 'mocks/auth.ts');
+    const nextAuthMockPath = path.resolve(__dirname, 'mocks/next-auth-v5.ts');
 
     config.resolve.alias = [
       { find: 'next-intl/server', replacement: serverMockPath },
-      { find: /.*\/prisma\/generated\/client/, replacement: mockPath },
-      { find: /^@prisma\/client/, replacement: mockPath },
-      { find: 'pg', replacement: mockPath },
-      { find: '@prisma/adapter-pg', replacement: mockPath },
+      { find: /.*\/prisma\/generated\/client/, replacement: emptyMockPath },
+      { find: /^@prisma\/client/, replacement: emptyMockPath },
+      { find: 'pg', replacement: emptyMockPath },
+      { find: '@prisma/adapter-pg', replacement: emptyMockPath },
+      { find: /^@\/auth$/, replacement: authMockPath },
+      { find: /^next-auth($|\/.*)/, replacement: nextAuthMockPath },
 
       { find: '@', replacement: path.resolve(__dirname, '../src') },
     ];
@@ -40,7 +44,12 @@ const config: StorybookConfig = {
       exclude: ['pg', '@prisma/client', '@prisma/adapter-pg'],
     };
 
-    config.define = { 'process.env': {}, __dirname: JSON.stringify('') };
+    config.define = {
+      ...config.define,
+      __dirname: JSON.stringify(''),
+      'process.env.AUTH_SECRET': JSON.stringify('storybook-secret-123'),
+      'process.env.AUTH_SECRET_1': JSON.stringify('storybook-secret-123'),
+    };
 
     return config;
   },

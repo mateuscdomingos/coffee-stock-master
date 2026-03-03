@@ -20,7 +20,7 @@ interface UserMenuProps {
 
 export function UserMenu({ user }: UserMenuProps) {
   const t = useTranslations('components.navigation');
-  console.log(user?.image);
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
