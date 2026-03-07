@@ -16,6 +16,7 @@ model Store {
   userId               String
 
   user User @relation(fields: [userId], references: [id])
+  products Product[]
 }
 
 model Order {
@@ -53,4 +54,21 @@ model User {
 
   orders Order[]
   stores Store[]
+}
+
+model Product {
+  id                   String   @id @default(uuid())
+  name                 String
+  roast                String
+  priceInCents         Int
+  stockQuantity        Int      @default(0)
+  minimumStockQuantity Int      @default(0)
+  unit                 String
+  
+  storeId              String
+  store                Store    @relation(fields: [storeId], references: [id], onDelete: Cascade)
+
+  createdAt            DateTime @default(now())
+
+  @@index([storeId])
 }
