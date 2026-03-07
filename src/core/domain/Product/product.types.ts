@@ -1,8 +1,8 @@
 export interface ProductProps {
   id: string;
   name: string;
-  description: string;
-  price: number;
+  roast: 'light' | 'medium' | 'dark';
+  priceInCents: number;
   stockQuantity: number;
   minimumStockQuantity: number;
   unit: string;

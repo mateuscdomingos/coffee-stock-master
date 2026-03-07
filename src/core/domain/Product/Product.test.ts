@@ -1,5 +1,6 @@
 import { Product } from './Product.class';
 import * as productFP from './product.fn';
+import { ProductProps } from './product.types';
 
 describe('Domain: Product', () => {
   describe('Paradigm: Object-Oriented (OOP)', () => {
@@ -8,8 +9,8 @@ describe('Domain: Product', () => {
         const product = new Product({
           id: '1',
           name: 'Coffee Beans',
-          description: 'Premium coffee beans',
-          price: 15.99,
+          priceInCents: 1599,
+          roast: 'light',
           stockQuantity: 100,
           minimumStockQuantity: 10,
           unit: 'kg',
@@ -18,8 +19,8 @@ describe('Domain: Product', () => {
 
         expect(product.props.id).toBe('1');
         expect(product.props.name).toBe('Coffee Beans');
-        expect(product.props.description).toBe('Premium coffee beans');
-        expect(product.props.price).toBe(15.99);
+        expect(product.props.priceInCents).toBe(1599);
+        expect(product.props.roast).toBe('light');
         expect(product.props.stockQuantity).toBe(100);
         expect(product.props.minimumStockQuantity).toBe(10);
         expect(product.props.unit).toBe('kg');
@@ -32,8 +33,8 @@ describe('Domain: Product', () => {
             new Product({
               id: '1',
               name: 'Coffee Beans',
-              description: 'Premium coffee beans',
-              price: 15.99,
+              priceInCents: 1599,
+              roast: 'light',
               stockQuantity: -10,
               minimumStockQuantity: 10,
               unit: 'kg',
@@ -48,8 +49,8 @@ describe('Domain: Product', () => {
             new Product({
               id: '1',
               name: 'Coffee Beans',
-              description: 'Premium coffee beans',
-              price: 15.99,
+              priceInCents: 1599,
+              roast: 'light',
               stockQuantity: 100,
               minimumStockQuantity: -5,
               unit: 'kg',
@@ -64,8 +65,8 @@ describe('Domain: Product', () => {
         const product = new Product({
           id: '1',
           name: 'Coffee Beans',
-          description: 'Premium coffee beans',
-          price: 15.99,
+          priceInCents: 1599,
+          roast: 'light',
           stockQuantity: 100,
           minimumStockQuantity: 10,
           unit: 'kg',
@@ -81,8 +82,8 @@ describe('Domain: Product', () => {
         const product = new Product({
           id: '1',
           name: 'Coffee Beans',
-          description: 'Premium coffee beans',
-          price: 15.99,
+          priceInCents: 1599,
+          roast: 'light',
           stockQuantity: 100,
           minimumStockQuantity: 10,
           unit: 'kg',
@@ -100,8 +101,8 @@ describe('Domain: Product', () => {
         const product = new Product({
           id: '1',
           name: 'Coffee Beans',
-          description: 'Premium coffee beans',
-          price: 15.99,
+          priceInCents: 1599,
+          roast: 'light',
           stockQuantity: 100,
           minimumStockQuantity: 10,
           unit: 'kg',
@@ -117,8 +118,8 @@ describe('Domain: Product', () => {
         const product = new Product({
           id: '1',
           name: 'Coffee Beans',
-          description: 'Premium coffee beans',
-          price: 15.99,
+          priceInCents: 1599,
+          roast: 'light',
           stockQuantity: 100,
           minimumStockQuantity: 10,
           unit: 'kg',
@@ -135,11 +136,11 @@ describe('Domain: Product', () => {
   describe('Paradigm: Functional (FP)', () => {
     describe('when creating a Product', () => {
       it('should create a Product with valid properties', () => {
-        const productProps = {
+        const productProps: ProductProps = {
           id: 'prod-123',
           name: 'Espresso Beans',
-          description: 'High quality espresso beans',
-          price: 1500,
+          priceInCents: 1500,
+          roast: 'light',
           stockQuantity: 100,
           minimumStockQuantity: 20,
           unit: 'grams',
@@ -150,8 +151,8 @@ describe('Domain: Product', () => {
 
         expect(product.id).toBe('prod-123');
         expect(product.name).toBe('Espresso Beans');
-        expect(product.description).toBe('High quality espresso beans');
-        expect(product.price).toBe(1500);
+        expect(product.roast).toBe('light');
+        expect(product.priceInCents).toBe(1500);
         expect(product.stockQuantity).toBe(100);
         expect(product.minimumStockQuantity).toBe(20);
         expect(product.unit).toBe('grams');
@@ -159,11 +160,11 @@ describe('Domain: Product', () => {
       });
 
       it('should throw an error if stockQuantity is negative', () => {
-        const productProps = {
+        const productProps: ProductProps = {
           id: 'prod-123',
           name: 'Espresso Beans',
-          description: 'High quality espresso beans',
-          price: 1500,
+          priceInCents: 1599,
+          roast: 'light',
           stockQuantity: -10,
           minimumStockQuantity: 20,
           unit: 'grams',
@@ -176,11 +177,11 @@ describe('Domain: Product', () => {
       });
 
       it('should throw an error if minimumStockQuantity is negative', () => {
-        const productProps = {
+        const productProps: ProductProps = {
           id: 'prod-123',
           name: 'Espresso Beans',
-          description: 'High quality espresso beans',
-          price: 1500,
+          priceInCents: 1599,
+          roast: 'light',
           stockQuantity: 100,
           minimumStockQuantity: -5,
           unit: 'grams',
@@ -195,11 +196,11 @@ describe('Domain: Product', () => {
 
     describe('updateStockQuantity', () => {
       it('should update the stock quantity correctly', () => {
-        const productProps = {
+        const productProps: ProductProps = {
           id: 'prod-123',
           name: 'Espresso Beans',
-          description: 'High quality espresso beans',
-          price: 1500,
+          priceInCents: 1599,
+          roast: 'light',
           stockQuantity: 100,
           minimumStockQuantity: 20,
           unit: 'grams',
@@ -214,11 +215,11 @@ describe('Domain: Product', () => {
       });
 
       it('should throw an error if the new stock quantity is negative', () => {
-        const productProps = {
+        const productProps: ProductProps = {
           id: 'prod-123',
           name: 'Espresso Beans',
-          description: 'High quality espresso beans',
-          price: 1500,
+          priceInCents: 1599,
+          roast: 'light',
           stockQuantity: 100,
           minimumStockQuantity: 20,
           unit: 'grams',
@@ -235,11 +236,11 @@ describe('Domain: Product', () => {
 
     describe('updateMinimumStockQuantity', () => {
       it('should update the minimum stock quantity correctly', () => {
-        const productProps = {
+        const productProps: ProductProps = {
           id: 'prod-123',
           name: 'Espresso Beans',
-          description: 'High quality espresso beans',
-          price: 1500,
+          priceInCents: 1599,
+          roast: 'light',
           stockQuantity: 100,
           minimumStockQuantity: 20,
           unit: 'grams',
@@ -257,11 +258,11 @@ describe('Domain: Product', () => {
       });
 
       it('should throw an error if the new minimum stock quantity is negative', () => {
-        const productProps = {
+        const productProps: ProductProps = {
           id: 'prod-123',
           name: 'Espresso Beans',
-          description: 'High quality espresso beans',
-          price: 1500,
+          priceInCents: 1599,
+          roast: 'light',
           stockQuantity: 100,
           minimumStockQuantity: 20,
           unit: 'grams',
