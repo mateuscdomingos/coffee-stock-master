@@ -1,8 +1,46 @@
 {
   "cSpell:disable": true,
+  "inventoryPage": {
+    "title": "Inventário",
+    "description": "Gerencie seus grãos, insumos e níveis de estoque.",
+    "newProduct": "Novo Produto",
+    "table": {
+      "actions": "Ações",
+      "product": "Produto",
+      "roast": "Torra",
+      "stock": "Qtd.",
+      "price": "Preço",
+      "empty": "Nenhum produto encontrado.",
+      "roastLevels": {
+        "light": "Clara",
+        "medium": "Média",
+        "dark": "Escura"
+      }
+    },
+    "form": {
+      "name": "Nome do Café",
+      "namePlaceholder": "Ex: Bourbon Amarelo",
+      "roastLevel": "Nível de Torra",
+      "weight": "Peso por Unidade (g)",
+      "price": "Preço de Venda",
+      "stock": "Estoque Inicial",
+      "minStock": "Estoque Mínimo (Alerta)",
+      "submit": "Cadastrar Produto",
+      "success": "Produto cadastrado com sucesso!"
+    },
+    "validation": {
+      "nameRequired": "O nome do café é obrigatório",
+      "stockInvalid": "A quantidade não pode ser negativa",
+      "priceRequired": "Informe o preço de venda"
+    }
+  },
   "loginPage": {
     "description": "Insira seu e-mail abaixo para acessar sua conta.",
     "title": "Conecte-se"
+  },
+  "newProductPage": {
+    "description": "Insira as informações do Produto abaixo para criar um novo Produto.",
+    "title": "Criar novo Produto"
   },
   "newStorePage": {
     "description": "Insira as informações da Loja abaixo para criar uma nova Loja.",
@@ -53,6 +91,23 @@
       "myStores": "Minhas Lojas",
       "preferences": "Preferências",
       "switchLanguage": "Alterar Idioma"
+    },
+    "product": {
+      "minStock": "Estoque Mín",
+      "name": "Nome",
+      "nameRequired": "Nome do produto é obrigatório",
+      "price": "Preço",
+      "priceRequired": "Preço é obrigatório",
+      "productCreated": "Produto criado",
+      "roastLevel": "Nível de Torra",
+      "roastOptions": {
+        "dark": "Escura",
+        "light": "Clara",
+        "medium": "Média"
+      },
+      "stock": "Estoque Atual",
+      "submit": "Enviar",
+      "unit": "Unidade"
     },
     "stores": {
       "addStoreButton": {

@@ -1,7 +1,45 @@
 {
+  "inventoryPage": {
+    "title": "Inventory",
+    "description": "Manage your beans, supplies, and stock levels.",
+    "newProduct": "New Product",
+    "table": {
+      "actions": "Actions",
+      "product": "Product",
+      "roast": "Roast",
+      "stock": "Stock",
+      "price": "Price",
+      "empty": "No products found.",
+      "roastLevels": {
+        "light": "Light",
+        "medium": "Medium",
+        "dark": "Dark"
+      }
+    },
+    "form": {
+      "name": "Coffee Name",
+      "namePlaceholder": "Ex: Yellow Bourbon",
+      "roastLevel": "Roast Level",
+      "weight": "Weight per Unit (g)",
+      "price": "Selling Price",
+      "stock": "Initial Stock",
+      "minStock": "Minimum Stock (Alert)",
+      "submit": "Register Product",
+      "success": "Product registered successfully!"
+    },
+    "validation": {
+      "nameRequired": "Coffee name is required",
+      "stockInvalid": "Quantity cannot be negative",
+      "priceRequired": "Please provide a selling price"
+    }
+  },
   "loginPage": {
     "description": "Enter your email below to login to your account.",
     "title": "Login"
+  },
+  "newProductPage": {
+    "description": "Enter Product information below to create a new Product.",
+    "title": "Create new Product"
   },
   "newStorePage": {
     "description": "Enter Store information below to create a new Store.",
@@ -52,6 +90,23 @@
       "myStores": "My Stores",
       "preferences": "Preferences",
       "switchLanguage": "Switch Language"
+    },
+    "product": {
+      "minStock": "Min Stock",
+      "name": "Name",
+      "nameRequired": "Product name is required",
+      "price": "Price",
+      "priceRequired": "Price is required",
+      "productCreated": "Product Created",
+      "roastLevel": "Roast Level",
+      "roastOptions": {
+        "dark": "Dark",
+        "light": "Light",
+        "medium": "Medium"
+      },
+      "stock": "Stock",
+      "submit": "Submit",
+      "unit": "Unit"
     },
     "stores": {
       "addStoreButton": {
