@@ -5,9 +5,14 @@ import userEvent from '@testing-library/user-event';
 import { handleCreateProduct } from '@/app/actions/product-actions';
 import { toast } from 'sonner';
 
+const mockPush = jest.fn();
+
 jest.mock('next/navigation', () => ({
   useParams: () => ({
     id: 'store-123',
+  }),
+  useRouter: () => ({
+    push: mockPush,
   }),
 }));
 
@@ -71,6 +76,7 @@ describe('AddProductForm', () => {
       render(<AddProductForm />);
 
       expect(toast.success).toHaveBeenCalledWith('Product Created');
+      expect(mockPush).toHaveBeenCalledWith('/stores/store-123/inventory');
     });
 
     it('should display generic error message from server', () => {

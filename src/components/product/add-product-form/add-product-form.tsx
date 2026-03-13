@@ -23,9 +23,10 @@ import { useActionState, useEffect } from 'react';
 import { formatCentsToCurrency, parseCurrencyToCents } from '@/lib/utils';
 import { handleCreateProduct } from '@/app/actions/product-actions';
 import { toast } from 'sonner';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 
 export function AddProductForm() {
+  const router = useRouter();
   const params = useParams();
   const storeId = params.id as string;
   const t = useTranslations('components.product');
@@ -65,8 +66,10 @@ export function AddProductForm() {
   useEffect(() => {
     if (state?.success) {
       toast.success(t('productCreated'));
+      router.push(`/stores/${storeId}/inventory`);
     }
-  }, [state]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state, storeId]);
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">

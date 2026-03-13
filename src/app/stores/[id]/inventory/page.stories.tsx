@@ -24,7 +24,7 @@ const meta = {
   loaders: [
     async () => {
       GetProductByStoreIdUseCaseFactory.makeGetProductByStoreId = () => {
-        return async () => mockProducts as any;
+        return async () => mockProducts as never;
       };
       return {};
     },

@@ -24,6 +24,6 @@ describe('StoreCard', () => {
     render(<StoreCard store={mockStore} />);
 
     const link = screen.getByRole('link');
-    expect(link).toHaveAttribute('href', `/stores/${mockStore.id}/overview`);
+    expect(link).toHaveAttribute('href', `/stores/${mockStore.id}/inventory`);
   });
 });

@@ -95,7 +95,7 @@ describe('StoresPage', () => {
 
     const storeLinks = screen.queryAllByRole('link');
     const storeCards = storeLinks.filter((link) =>
-      link.getAttribute('href')?.includes('/overview'),
+      link.getAttribute('href')?.includes('/inventory'),
     );
 
     expect(storeCards).toHaveLength(0);

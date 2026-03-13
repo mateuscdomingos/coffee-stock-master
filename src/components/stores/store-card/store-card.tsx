@@ -16,7 +16,7 @@ export function StoreCard({ store }: StoreCardProps) {
   const { id, name, monthlyBudgetInCents } = store;
 
   return (
-    <Link href={`/stores/${id}/overview`} className="block group">
+    <Link href={`/stores/${id}/inventory`} className="block group">
       <Card className="transition-all group-hover:border-primary group-hover:shadow-md cursor-pointer">
         <CardHeader className="flex flex-row items-center justify-between space-y-0">
           <CardTitle className="text-lg font-bold truncate pr-2">
