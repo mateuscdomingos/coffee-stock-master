@@ -10,6 +10,9 @@ jest.mock('@/infra/factories/GetProductByStoreIdUseCaseFactory', () => ({
 
 describe('InventoryPage', () => {
   const mockStoreId = 'store-uuid-123';
+  const props = {
+    params: Promise.resolve({ id: mockStoreId }),
+  };
   const mockProducts = [
     {
       props: {
@@ -33,10 +36,6 @@ describe('InventoryPage', () => {
   });
 
   it('should render the inventory page with products from the use case', async () => {
-    const props = {
-      params: Promise.resolve({ id: mockStoreId }),
-    };
-
     const ResolvedPage = await InventoryPage(props);
     render(ResolvedPage);
 
@@ -47,7 +46,7 @@ describe('InventoryPage', () => {
       screen.getByText('Manage your beans, supplies, and stock levels.'),
     ).toBeInTheDocument();
 
-    const addButton = screen.getByRole('link');
+    const addButton = screen.getByRole('link', { name: 'newProduct' });
     expect(addButton).toHaveAttribute(
       'href',
       `/stores/${mockStoreId}/product/new`,
@@ -62,12 +61,22 @@ describe('InventoryPage', () => {
       GetProductByStoreIdUseCaseFactory.makeGetProductByStoreId as jest.Mock
     ).mockReturnValue(mockGetProducts);
 
-    const props = {
-      params: Promise.resolve({ id: mockStoreId }),
-    };
-
     await InventoryPage(props);
 
     expect(mockGetProducts).toHaveBeenCalledWith(mockStoreId);
+  });
+
+  it('should render the breadcrumb with correct navigation steps', async () => {
+    const ResolvedPage = await InventoryPage(props);
+    render(ResolvedPage);
+
+    const breadcrumb = screen.getByRole('navigation', { name: 'breadcrumb' });
+    expect(breadcrumb).toBeInTheDocument();
+
+    const storesLink = screen.getByRole('link', { name: 'Stores' });
+    expect(storesLink).toHaveAttribute('href', '/stores');
+
+    const currentPage = screen.getByText('Inventory', { selector: 'span' });
+    expect(currentPage).toBeInTheDocument();
   });
 });

@@ -32,7 +32,8 @@
       "nameRequired": "O nome do café é obrigatório",
       "stockInvalid": "A quantidade não pode ser negativa",
       "priceRequired": "Informe o preço de venda"
-    }
+    },
+    "stores": "Lojas"
   },
   "loginPage": {
     "description": "Insira seu e-mail abaixo para acessar sua conta.",
@@ -40,10 +41,15 @@
   },
   "newProductPage": {
     "description": "Insira as informações do Produto abaixo para criar um novo Produto.",
+    "inventory": "Inventário",
+    "newProduct": "Novo Produto",
+    "stores": "Lojas",
     "title": "Criar novo Produto"
   },
   "newStorePage": {
     "description": "Insira as informações da Loja abaixo para criar uma nova Loja.",
+    "newStore": "Nova Loja",
+    "stores": "Lojas",
     "title": "Criar nova Loja"
   },
   "registerPage": {

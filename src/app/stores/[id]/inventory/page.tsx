@@ -2,6 +2,7 @@ import { getTranslations } from 'next-intl/server';
 import { AddButton } from '@/components/ui/button';
 import { InventoryTable } from '@/components/inventory/table';
 import { GetProductByStoreIdUseCaseFactory } from '@/infra/factories/GetProductByStoreIdUseCaseFactory';
+import { Breadcrumb } from '@/components/navigation/breadcrumb';
 
 export default async function InventoryPage(props: {
   params: Promise<{ id: string }>;
@@ -14,8 +15,14 @@ export default async function InventoryPage(props: {
   const products = await getProducts(storeId);
   const productsProps = products.map((product) => product.props);
 
+  const steps = [
+    { label: t('stores'), href: '/stores' },
+    { label: t('title') },
+  ];
+
   return (
     <div className="space-y-6">
+      <Breadcrumb items={steps} />
       <div>
         <div className="flex gap-4 items-center">
           <h1 className="text-3xl font-bold tracking-tight">{t('title')}</h1>

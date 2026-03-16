@@ -25,4 +25,18 @@ describe('NewStorePage', () => {
 
     expect(screen.getByRole('button', { name: 'Submit' })).toBeInTheDocument();
   });
+
+  it('should render the breadcrumb with correct navigation steps', async () => {
+    const ResolvedPage = await NewStorePage();
+    render(ResolvedPage);
+
+    const breadcrumb = screen.getByRole('navigation', { name: 'breadcrumb' });
+    expect(breadcrumb).toBeInTheDocument();
+
+    const storesLink = screen.getByRole('link', { name: 'Stores' });
+    expect(storesLink).toHaveAttribute('href', '/stores');
+
+    const currentPage = screen.getByText('New Store', { selector: 'span' });
+    expect(currentPage).toBeInTheDocument();
+  });
 });
