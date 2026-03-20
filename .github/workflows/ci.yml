@@ -59,12 +59,8 @@ jobs:
       - name: Prettier check
         run: pnpm format:check
 
-      - name: Lint with Reviewdog
-        uses: reviewdog/action-eslint@v1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: github-pr-review
-          eslint_flags: 'src/'
+      - name: Lint check
+        run: pnpm lint
 
   test:
     needs: setup
