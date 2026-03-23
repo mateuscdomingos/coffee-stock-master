@@ -57,6 +57,8 @@
   },
   "storesPage": {
     "addNewStore": "Add new Store",
+    "noStoresFound": "No cafes found",
+    "noStoresDescription": "You haven't registered any units yet. How about starting to organize your inventory now?",
     "title": "Stores"
   },
   "components": {

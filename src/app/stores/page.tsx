@@ -1,4 +1,5 @@
 import { auth } from '@/auth';
+import { EmptyStores } from '@/components/stores/empty-stores';
 import { StoreCard } from '@/components/stores/store-card';
 import { AddButton } from '@/components/ui/button';
 import { H1 } from '@/components/ui/h1';
@@ -23,11 +24,16 @@ export default async function StoresPage() {
         <H1>{t('title')}</H1>
         <AddButton href="/stores/new" title={t('addNewStore')} />
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {stores.map((store) => (
-          <StoreCard key={store.props.id} store={{ ...store.props }} />
-        ))}
-      </div>
+
+      {stores.length === 0 ? (
+        <EmptyStores />
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {stores.map((store) => (
+            <StoreCard key={store.props.id} store={{ ...store.props }} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

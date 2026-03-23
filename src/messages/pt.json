@@ -58,6 +58,8 @@
   },
   "storesPage": {
     "addNewStore": "Adicionar nova Loja",
+    "noStoresFound": "Nenhuma cafeteria encontrada",
+    "noStoresDescription": "Você ainda não cadastrou nenhuma unidade. Que tal começar a organizar seu estoque agora?",
     "title": "Lojas"
   },
   "components": {

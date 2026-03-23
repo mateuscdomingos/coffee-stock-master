@@ -19,6 +19,10 @@ jest.mock('@/infra/factories/StoreUseCaseFactory', () => ({
   },
 }));
 
+jest.mock('@/components/stores/empty-stores', () => ({
+  EmptyStores: () => <div data-testid="empty-stores-mock">Empty Stores</div>,
+}));
+
 describe('StoresPage', () => {
   const mockUserId = 'user-123';
   const mockStores = [
@@ -99,5 +103,6 @@ describe('StoresPage', () => {
     );
 
     expect(storeCards).toHaveLength(0);
+    expect(screen.getByTestId('empty-stores-mock')).toBeInTheDocument();
   });
 });
