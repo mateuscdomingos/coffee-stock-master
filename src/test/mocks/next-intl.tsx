@@ -62,11 +62,34 @@ jest.mock('next-intl', () => {
 jest.mock('next-intl/server', () => ({
   getTranslations: jest.fn(async (namespace?: string) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const getNested = (obj: any, path: string) =>
-      path.split('.').reduce((acc, part) => acc && acc[part], obj);
+    const getNested = (obj: any, path: string) => {
+      if (!path) return obj;
+      return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+    };
 
     const tMessages = namespace ? getNested(messages, namespace) : messages;
 
-    return (key: string) => tMessages?.[key] || key;
+    const t = (key: string) => {
+      const value = getNested(tMessages, key);
+      return value !== undefined ? value : key;
+    };
+
+    t.rich = (key: string, components: any) => {
+      const rawText = t(key);
+      if (typeof rawText !== 'string') return rawText;
+
+      let processedText: React.ReactNode = rawText;
+      Object.keys(components).forEach((tagName) => {
+        const regex = new RegExp(`<${tagName}>(.*?)</${tagName}>`, 'g');
+        const match = regex.exec(rawText);
+        if (match) {
+          const renderFn = components[tagName];
+          processedText = renderFn(match[1]);
+        }
+      });
+      return processedText;
+    };
+
+    return t;
   }),
 }));
