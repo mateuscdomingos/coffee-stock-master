@@ -1,10 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import messages from '../../messages/en.json';
 
 jest.mock('next-intl', () => {
   return {
     useTranslations: (namespace: string) => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const getNested = (obj: any, path: string) =>
         path.split('.').reduce((acc, part) => acc && acc[part], obj);
 
@@ -61,7 +61,6 @@ jest.mock('next-intl', () => {
 
 jest.mock('next-intl/server', () => ({
   getTranslations: jest.fn(async (namespace?: string) => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const getNested = (obj: any, path: string) => {
       if (!path) return obj;
       return path.split('.').reduce((acc, part) => acc && acc[part], obj);

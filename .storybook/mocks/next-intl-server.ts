@@ -1,7 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import messages from '../../src/messages/en.json';
 
 export const getTranslations = async (namespace?: string) => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const getNested = (obj: any, path: string) => {
     if (!path) return obj;
     return path.split('.').reduce((acc, part) => acc && acc[part], obj);

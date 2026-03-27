@@ -16,8 +16,6 @@ describe('CICD Section', () => {
     const ResolvedComponent = await CICD();
     render(ResolvedComponent);
 
-    const steps = ['setup', 'qa', 'testing', 'build', 'deploy'];
-
     expect(screen.getByText('Setup & Cache')).toBeInTheDocument();
     expect(screen.getByText('Quality Assurance')).toBeInTheDocument();
     expect(screen.getByText('Automated Testing')).toBeInTheDocument();

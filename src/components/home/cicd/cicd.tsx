@@ -1,6 +1,5 @@
 import { Code2, Cpu, Globe, ShieldCheck, Zap } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
-import Link from 'next/link';
 
 export async function CICD() {
   const t = await getTranslations('homePage.cicd');
