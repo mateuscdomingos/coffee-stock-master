@@ -22,7 +22,7 @@ export async function Header() {
             className="flex items-center gap-2 font-bold text-xl tracking-tight text-primary"
           >
             <Store className="h-6 w-6" />
-            <span>StoreManager</span>
+            <span>CoffeeStock</span>
           </Link>
         </div>
 

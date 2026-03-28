@@ -40,7 +40,7 @@ export function MobileNav({ isAuthenticated }: { isAuthenticated: boolean }) {
         <div className="bg-secondary/80 p-5 border-b border-border/20">
           <SheetTitle className="flex items-center gap-2 text-primary">
             <Store className="h-6 w-6" />
-            <span className="font-bold tracking-tight">StoreManager</span>
+            <span className="font-bold tracking-tight">CoffeeStock</span>
           </SheetTitle>
         </div>
 

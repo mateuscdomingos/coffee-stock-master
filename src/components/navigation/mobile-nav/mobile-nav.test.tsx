@@ -19,7 +19,7 @@ describe('MobileNav Component', () => {
 
     await user.click(screen.getByRole('button'));
 
-    expect(screen.getByText('StoreManager')).toBeInTheDocument();
+    expect(screen.getByText('CoffeeStock')).toBeInTheDocument();
     expect(screen.getByText('Login')).toBeInTheDocument();
     expect(screen.getByText('Create Account')).toBeInTheDocument();
     expect(screen.queryByText('My Stores')).not.toBeInTheDocument();
@@ -54,6 +54,6 @@ describe('MobileNav Component', () => {
     const homeLink = screen.getByText('Home');
     await user.click(homeLink);
 
-    expect(screen.queryByText('StoreManager')).not.toBeInTheDocument();
+    expect(screen.queryByText('CoffeeStock')).not.toBeInTheDocument();
   });
 });

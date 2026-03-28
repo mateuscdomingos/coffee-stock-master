@@ -32,7 +32,7 @@ describe('Header Component', () => {
       const ResolvedHeader = await Header();
       render(ResolvedHeader);
 
-      expect(screen.getByText('StoreManager')).toBeInTheDocument();
+      expect(screen.getByText('CoffeeStock')).toBeInTheDocument();
       expect(screen.getByRole('link', { name: 'Login' })).toHaveAttribute(
         'href',
         '/login',
