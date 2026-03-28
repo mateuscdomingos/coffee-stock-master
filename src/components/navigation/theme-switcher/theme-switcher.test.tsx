@@ -35,7 +35,7 @@ describe('ThemeSwitcher Component', () => {
     const button = screen.getByRole('button');
     await user.click(button);
 
-    const lightOption = screen.getByText('Claro');
+    const lightOption = screen.getByText('Light');
     expect(lightOption.closest('div')).toHaveClass('bg-accent', 'font-bold');
   });
 
@@ -51,7 +51,7 @@ describe('ThemeSwitcher Component', () => {
     const button = screen.getByRole('button');
     await user.click(button);
 
-    const darkOption = screen.getByText('Escuro');
+    const darkOption = screen.getByText('Dark');
     expect(darkOption.closest('div')).toHaveClass('bg-accent', 'font-bold');
   });
 
@@ -62,7 +62,7 @@ describe('ThemeSwitcher Component', () => {
     const button = screen.getByRole('button');
     await user.click(button);
 
-    const darkOption = screen.getByText('Escuro');
+    const darkOption = screen.getByText('Dark');
     await user.click(darkOption);
 
     expect(mockSetTheme).toHaveBeenCalledWith('dark');
@@ -76,7 +76,7 @@ describe('ThemeSwitcher Component', () => {
     const button = screen.getByRole('button');
     await user.click(button);
 
-    const systemOption = screen.getByText('Sistema');
+    const systemOption = screen.getByText('System');
     await user.click(systemOption);
 
     expect(mockSetTheme).toHaveBeenCalledWith('system');
